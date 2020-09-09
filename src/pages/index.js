@@ -97,7 +97,6 @@ export default function Home({ data }) {
 export const query = graphql`
   query {
     hero: file(relativePath: { eq: "hero.jpg" }) {
-      relativePath
       childImageSharp {
         fluid(maxWidth: 1600) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
@@ -105,7 +104,6 @@ export const query = graphql`
       }
     }
     fruit: file(relativePath: { eq: "fruit.jpg" }) {
-      relativePath
       childImageSharp {
         fluid(maxWidth: 320) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
@@ -113,7 +111,6 @@ export const query = graphql`
       }
     }
     grain: file(relativePath: { eq: "grain.jpg" }) {
-      relativePath
       childImageSharp {
         fluid(maxWidth: 320) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
@@ -121,7 +118,6 @@ export const query = graphql`
       }
     }
     beverage: file(relativePath: { eq: "beverage.jpg" }) {
-      relativePath
       childImageSharp {
         fluid(maxWidth: 320) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
@@ -129,20 +125,11 @@ export const query = graphql`
       }
     }
     berry: file(relativePath: { eq: "berry.jpg" }) {
-      relativePath
       childImageSharp {
         fluid(maxWidth: 1600) {
           ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
-    # pattern: file(relativePath: { eq: "pattern.jpg" }) {
-    #   relativePath
-    #   childImageSharp {
-    #     fluid(maxWidth: 1920, quality: 90) {
-    #       ...GatsbyImageSharpFluid_withWebp_tracedSVG
-    #     }
-    #   }
-    # }
   }
 `
