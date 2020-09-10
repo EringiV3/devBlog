@@ -21,6 +21,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
       }
+      allContentfulCategory {
+        edges {
+          node {
+            categorySlug
+            id
+            category
+            blogpost {
+              title
+            }
+          }
+        }
+      }
     }
   `)
 
@@ -58,6 +70,32 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         isFirst: i + 1 === 1,
         isLast: i + 1 === blogPages,
       },
+    })
+  })
+
+  blogResult.data.allContentfulCategory.edges.forEach(({ node }) => {
+    const categoryPostsPerPage = 6
+    const categoryPosts = node.blogpost.length
+    const categoryPages = Math.ceil(categoryPosts / categoryPostsPerPage)
+
+    Array.from({ length: categoryPages }).forEach((_, i) => {
+      createPage({
+        path:
+          i === 0
+            ? `/category/${node.categorySlug}/`
+            : `/category/${node.categorySlug}/${i + 1}/`,
+        component: path.resolve(`./src/templates/category-template.js`),
+        context: {
+          categoryId: node.id,
+          categoryName: node.category,
+          categorySlug: node.categorySlug,
+          skip: categoryPostsPerPage * i,
+          limit: categoryPostsPerPage,
+          currentPage: i + 1,
+          isFirst: i + 1 === 1,
+          isLast: i + 1 === categoryPages,
+        },
+      })
     })
   })
 }
