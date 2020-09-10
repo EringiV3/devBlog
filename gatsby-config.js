@@ -7,12 +7,12 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `ESSENTIALS`,
-    description: `おいしい食材と食事を探求するサイト`,
+    title: `EringiDev`,
+    description: `得た知見をアウトプットする場所です。`,
     lang: `ja`,
-    siteUrl: `https://my-first-gatsby-basesite.netlify.app`,
-    locale: `js_JP`,
-    fbappid: `xxxxxxxxxx`,
+    siteUrl: `https://eringiv3-dev-blog.netlify.app`,
+    locale: `ja_JP`,
+    fbappid: ``,
   },
   plugins: [
     `gatsby-transformer-sharp`,
@@ -28,8 +28,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `ESSENTIALS エッセンシャルズ`,
-        short_name: `ESSENTIALS`,
+        name: `EringiDev`,
+        short_name: `EringiDev`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#477294`,
