@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import Image from "../components/image"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,13 +10,7 @@ export default function Home({ data }) {
     <Layout>
       <SEO />
       <section className="hero">
-        <figure>
-          <Img
-            fluid={data.hero.childImageSharp.fluid}
-            alt=""
-            style={{ height: "100%" }}
-          />
-        </figure>
+        <Image filename="hero.jpg" alt="" style={{ height: "100%" }} />
         <div className="catch">
           <h1>
             There is no love sincerer than
@@ -44,9 +39,7 @@ export default function Home({ data }) {
           </h2>
           <div className="details">
             <div className="detail">
-              <figure>
-                <Img fluid={data.fruit.childImageSharp.fluid} alt="" />
-              </figure>
+              <Image filename="fruit.jpg" alt="" />
               <h3>フルーツ</h3>
               <p>FRUIT</p>
               <p>
@@ -56,9 +49,8 @@ export default function Home({ data }) {
               </p>
             </div>
             <div className="detail">
-              <figure>
-                <Img fluid={data.grain.childImageSharp.fluid} alt="" />
-              </figure>
+              <Image filename="grain.jpg" alt="" />
+
               <h3>穀物</h3>
               <p>GRAIN</p>
               <p>
@@ -68,9 +60,7 @@ export default function Home({ data }) {
               </p>
             </div>
             <div className="detail">
-              <figure>
-                <Img fluid={data.beverage.childImageSharp.fluid} alt="" />
-              </figure>
+              <Image filename="beverage.jpg" alt="" />
               <h3>飲み物</h3>
               <p>BEVERAGE</p>
               <p>
@@ -84,13 +74,7 @@ export default function Home({ data }) {
       </section>
       <section className="photo">
         <h2 className="sr-only">Photo</h2>
-        <figure>
-          <Img
-            fluid={data.berry.childImageSharp.fluid}
-            alt=""
-            style={{ height: "100%" }}
-          />
-        </figure>
+        <Image filename="berry.jpg" alt="" style={{ height: "100%" }} />
       </section>
 
       <section>
@@ -120,41 +104,6 @@ export default function Home({ data }) {
 
 export const query = graphql`
   query {
-    hero: file(relativePath: { eq: "hero.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1600) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-    fruit: file(relativePath: { eq: "fruit.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 320) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-    grain: file(relativePath: { eq: "grain.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 320) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-    beverage: file(relativePath: { eq: "beverage.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 320) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-    berry: file(relativePath: { eq: "berry.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1600) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
     allContentfulBlogPost(
       sort: { order: DESC, fields: publishDate }
       skip: 0
