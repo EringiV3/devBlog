@@ -9,6 +9,7 @@ export default ({
   pageimg,
   pageimgw,
   pageimgh,
+  blogimg,
 }) => {
   const {
     site: { siteMetadata },
@@ -39,7 +40,7 @@ export default ({
 
   const imgurl = pageimg
     ? `${siteMetadata.siteUrl}${pageimg}`
-    : `${siteMetadata.siteUrl}/thumb.jpg`
+    : blogimg || `${siteMetadata.siteUrl}/thumb.jpg`
 
   const imgw = pageimgw || 1280
   const imgh = pageimgh || 640
