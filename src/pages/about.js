@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUtensils, faCheckSquare } from "@fortawesome/free-solid-svg-icons"
 import SEO from "../components/seo"
 
-export default function Home({ data, location }) {
+export default ({ data, location }) => {
   return (
     <Layout>
       <SEO
-        pagetitle="ESSENTIALについて"
-        pagedesc="食べ物についての情報を発信しているサイトです"
+        pagetitle="このブログについて"
+        pagedesc="アウトプットの場として使います"
         pagepath={location.pathname}
         pageimg={data.about.childImageSharp.original.src}
         pageimgw={data.about.childImageSharp.original.width}

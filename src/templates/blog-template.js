@@ -2,12 +2,12 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql, Link } from "gatsby"
-import Img from "gatsby-image"
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Imgix from "react-imgix"
 
 export default ({ data, location, pageContext }) => {
   return (
@@ -21,13 +21,14 @@ export default ({ data, location, pageContext }) => {
         <div className="container">
           <h1 className="bar">RECENT POSTS</h1>
           <div className="posts">
-            {data.allContentfulBlogPost.edges.map(({ node }) => (
+            {data.allMicrocmsBlog.edges.map(({ node }) => (
               <article className="post" key={node.id}>
                 <Link to={`/blog/post/${node.slug}`}>
                   <figure>
-                    <Img
-                      fluid={node.eyecatch.fluid}
-                      alt={node.eyecatch.description}
+                    <Imgix
+                      src={node.eyecatch.url}
+                      sizes="(max-width: 500px) 100vw, 500px"
+                      htmlAttributes={{ alt: "" }}
                       style={{ height: "100%" }}
                     />
                   </figure>
@@ -69,7 +70,7 @@ export default ({ data, location, pageContext }) => {
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {
-    allContentfulBlogPost(
+    allMicrocmsBlog(
       sort: { order: DESC, fields: publishDate }
       skip: $skip
       limit: $limit
@@ -80,10 +81,7 @@ export const query = graphql`
           id
           slug
           eyecatch {
-            fluid(maxWidth: 500) {
-              ...GatsbyContentfulFluid_withWebp
-            }
-            description
+            url
           }
         }
       }

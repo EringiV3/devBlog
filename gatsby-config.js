@@ -39,14 +39,6 @@ module.exports = {
     },
     `gatsby-plugin-offline`,
     {
-      resolve: `gatsby-source-contentful`,
-      options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-        host: process.env.CONTENTFUL_HOST,
-      },
-    },
-    {
       resolve: `gatsby-plugin-sitemap`,
       options: {
         output: `/sitemap.xml`,
@@ -75,6 +67,27 @@ module.exports = {
             }
           })
         },
+      },
+    },
+    {
+      resolve: "gatsby-source-microcms",
+      options: {
+        apiKey: process.env.microCMS_API_KEY,
+        serviceId: "eringiv3devblog",
+        apis: [
+          {
+            endpoint: "blog",
+            query: {
+              limit: 100,
+            },
+          },
+          {
+            endpoint: "category",
+            query: {
+              limit: 100,
+            },
+          },
+        ],
       },
     },
   ],

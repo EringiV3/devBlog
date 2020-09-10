@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Image from "../components/image"
-import Img from "gatsby-image"
+import Imgix from "react-imgix"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -81,14 +81,14 @@ export default function Home({ data }) {
         <div className="container">
           <h2 className="sr-only">RECENT POSTS</h2>
           <div className="posts">
-            {data.allContentfulBlogPost.edges.map(({ node }) => (
+            {data.allMicrocmsBlog.edges.map(({ node }) => (
               <article className="post" key={node.id}>
                 <Link to={`/blog/post/${node.slug}`}>
                   <figure>
-                    <Img
-                      fluid={node.eyecatch.fluid}
-                      alt={node.eyecatch.description}
-                      style={{ height: "100%" }}
+                    <Imgix
+                      src={node.eyecatch.url}
+                      sizes="(max-width: 573px) 100vw, 573px"
+                      htmlAttributes={{ alt: "" }}
                     />
                   </figure>
                   <h3>{node.title}</h3>
@@ -104,8 +104,8 @@ export default function Home({ data }) {
 
 export const query = graphql`
   query {
-    allContentfulBlogPost(
-      sort: { order: DESC, fields: publishDate }
+    allMicrocmsBlog(
+      sort: { fields: publishDate, order: DESC }
       skip: 0
       limit: 4
     ) {
@@ -115,10 +115,7 @@ export const query = graphql`
           id
           slug
           eyecatch {
-            fluid(maxWidth: 573) {
-              ...GatsbyContentfulFluid_withWebp
-            }
-            description
+            url
           }
         }
       }

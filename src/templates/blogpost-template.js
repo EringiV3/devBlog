@@ -12,72 +12,85 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
-import Img from "gatsby-image"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { BLOCKS } from "@contentful/rich-text-types"
-import useContentfulImage from "../utils/useContentfulImage"
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer"
+import htmlToText from "html-to-text"
+import Imgix from "react-imgix"
+import unified from "unified"
+import parse from "rehype-parse"
+import rehypeReact from "rehype-react"
 
-const options = {
-  renderNode: {
-    [BLOCKS.HEADING_2]: (node, children) => (
-      <h2>
-        <FontAwesomeIcon icon={faCheckSquare} />
-        {children}
-      </h2>
-    ),
-    [BLOCKS.EMBEDDED_ASSET]: node => (
-      <Img
-        fluid={useContentfulImage(node.data.target.fields.file["ja-JP"].url)}
-        alt={
-          node.data.target.fields.description
-            ? node.data.target.fields.description["ja-JP"]
-            : node.data.target.fields.title["ja-JP"]
-        }
-      />
-    ),
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+  Fragment: React.Fragment,
+  components: {
+    h2: props => {
+      return (
+        <h2>
+          <FontAwesomeIcon icon={faCheckSquare} />
+          {props.children}
+        </h2>
+      )
+    },
+    img: props => {
+      return (
+        <Imgix
+          src={props.src}
+          sizes="(max-width: 785px) 100vw, 785px"
+          htmlAttributes={{ alt: props.alt }}
+        />
+      )
+    },
   },
-  renderText: text => {
-    return text.split("\n").reduce((children, textSegment, index) => {
-      return [...children, index > 0 && <br key={index} />, textSegment]
-    }, [])
-  },
-}
+}).Compiler
 
 export default ({ data, pageContext, location }) => {
+  const htmlAst = unified()
+    .use(parse, { fragment: true })
+    .parse(data.microcmsBlog.content)
+
+  const pb =
+    (data.microcmsBlog.fields.height / data.microcmsBlog.fields.width) * 100
   return (
     <Layout>
       <SEO
-        pagetitle={data.contentfulBlogPost.title}
-        pagedesc={`${documentToPlainTextString(
-          data.contentfulBlogPost.content.json
-        ).slice(0, 70)}...`}
+        pagetitle={data.microcmsBlog.title}
+        pagedesc={`${htmlToText
+          .fromString(data.microcmsBlog.content, {
+            ignoreImage: true,
+            ignoreHref: true,
+          })
+          .slice(0, 70)}...`}
         pagepath={location.pathname}
-        blogimg={`https:${data.contentfulBlogPost.eyecatch.file.url}`}
-        pageimgw={data.contentfulBlogPost.eyecatch.file.details.image.width}
-        pageimgh={data.contentfulBlogPost.eyecatch.file.details.image.height}
+        blogimg={`https:${data.microcmsBlog.eyecatch.url}`}
+        pageimgw={data.microcmsBlog.fields.width}
+        pageimgh={data.microcmsBlog.fields.height}
       />
       <div>
         <div className="eyecatch">
           <figure>
-            <Img
-              fluid={data.contentfulBlogPost.eyecatch.fluid}
-              alt={data.contentfulBlogPost.eyecatch.description}
-            />
+            <div
+              className="eyecatch-wrapper"
+              style={{ paddingBottom: `${pb}%` }}
+            >
+              <Imgix
+                src={data.microcmsBlog.eyecatch.url}
+                sizes="(max-width: 1600px) 100vw, 1600px"
+                htmlAttributes={{ alt: "" }}
+              />
+            </div>
           </figure>
         </div>
         <article className="content">
           <div className="container">
-            <h1 className="bar">{data.contentfulBlogPost.title}</h1>
+            <h1 className="bar">{data.microcmsBlog.title}</h1>
             <aside className="info">
-              <time dateTime={data.contentfulBlogPost.publishDate}>
+              <time dateTime={data.microcmsBlog.publishDate}>
                 <FontAwesomeIcon icon={faClock} />
-                {data.contentfulBlogPost.publishDateJP}
+                {data.microcmsBlog.publishDateJP}
               </time>
               <div className="cat">
                 <FontAwesomeIcon icon={faFolderOpen} />
                 <ul>
-                  {data.contentfulBlogPost.category.map(category => (
+                  {data.microcmsBlog.category.map(category => (
                     <li className={category.categorySlug} key={category.id}>
                       <Link to={`/category/${category.categorySlug}/`}>
                         {category.category}
@@ -87,12 +100,7 @@ export default ({ data, pageContext, location }) => {
                 </ul>
               </div>
             </aside>
-            <div className="postbody">
-              {documentToReactComponents(
-                data.contentfulBlogPost.content.json,
-                options
-              )}
-            </div>
+            <div className="postbody">{renderAst(htmlAst)}</div>
             <ul className="postlink">
               {pageContext.next && (
                 <li className="prev">
@@ -123,7 +131,7 @@ export default ({ data, pageContext, location }) => {
 
 export const query = graphql`
   query($id: String!) {
-    contentfulBlogPost(id: { eq: $id }) {
+    microcmsBlog(id: { eq: $id }) {
       title
       publishDateJP: publishDate(formatString: "YYYY年MM月DD日")
       publishDate
@@ -133,23 +141,13 @@ export const query = graphql`
         id
       }
       eyecatch {
-        fluid(maxWidth: 1600) {
-          ...GatsbyContentfulFluid_withWebp
-        }
-        description
-        file {
-          details {
-            image {
-              height
-              width
-            }
-          }
-          url
-        }
+        url
       }
-      content {
-        json
+      fields {
+        height
+        width
       }
+      content
     }
   }
 `
