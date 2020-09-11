@@ -98,7 +98,7 @@ module.exports = {
           {
             nodeType: `MicrocmsBlog`,
             fieldName: `featuredImage`,
-            getUrl: node => node.eyecatch.url,
+            getUrl: node => (node.eyecatch !== null ? node.eyecatch.url : ``),
           },
         ],
       },
