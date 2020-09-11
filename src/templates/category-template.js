@@ -7,7 +7,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Img from "gatsby-image"
+import ArticleCard from "../components/article-card"
 
 export default ({ data, location, pageContext }) => {
   return (
@@ -22,18 +22,7 @@ export default ({ data, location, pageContext }) => {
           <h1 className="bar">CATEGORY: {pageContext.categoryName}</h1>
           <div className="posts">
             {data.allMicrocmsBlog.edges.map(({ node }) => (
-              <article className="post" key={node.id}>
-                <Link to={`/blog/post/${node.slug}`}>
-                  <figure>
-                    <Img
-                      fluid={node.fields.featuredImage.fluid}
-                      alt=""
-                      style={{ height: "100%" }}
-                    />
-                  </figure>
-                  <h3>{node.title}</h3>
-                </Link>
-              </article>
+              <ArticleCard article={node} />
             ))}
           </div>
           <ul className="pagenation">
@@ -87,19 +76,12 @@ export const query = graphql`
           title
           id
           slug
-          fields {
-            featuredImage {
-              fluid(maxWidth: 1600) {
-                aspectRatio
-                base64
-                sizes
-                src
-                srcSet
-                srcSetWebp
-                srcWebp
-              }
-            }
+          category {
+            category
+            categorySlug
+            id
           }
+          publishDate(formatString: "YYYY.MM.DD")
         }
       }
     }

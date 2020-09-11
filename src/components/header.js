@@ -27,6 +27,9 @@ export default () => (
           <li>
             <Link to={`/blog/`}>BLOG</Link>
           </li>
+          <li>
+            <Link to={`/categories/`}>Categories</Link>
+          </li>
         </ul>
       </nav>
     </div>
