@@ -3,55 +3,17 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql, Link } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faClock,
-  faFolderOpen,
-  faCheckSquare,
-} from "@fortawesome/free-solid-svg-icons"
+import { faClock, faFolderOpen } from "@fortawesome/free-solid-svg-icons"
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import htmlToText from "html-to-text"
-import Imgix from "react-imgix"
-import unified from "unified"
-import parse from "rehype-parse"
-import rehypeReact from "rehype-react"
 import Img from "gatsby-image"
-
-const renderAst = new rehypeReact({
-  createElement: React.createElement,
-  Fragment: React.Fragment,
-  components: {
-    h2: props => {
-      return (
-        <h2>
-          <FontAwesomeIcon icon={faCheckSquare} />
-          {props.children}
-        </h2>
-      )
-    },
-    img: props => {
-      console.log({ props })
-      return (
-        // TODO 削除する
-        <Imgix
-          src={props.src}
-          sizes="(max-width: 785px) 100vw, 785px"
-          htmlAttributes={{ alt: props.alt }}
-        />
-      )
-    },
-  },
-}).Compiler
+import PostBody from "../components/post-body"
 
 export default ({ data, pageContext, location }) => {
-  const htmlAst = unified()
-    .use(parse, { fragment: true })
-    .parse(data.microcmsBlog.content)
-
-  const pb =
-    (data.microcmsBlog.fields.height / data.microcmsBlog.fields.width) * 100
+  const existsEyecatch = data.microcmsBlog.eyecatch !== null
   return (
     <Layout>
       <SEO
@@ -63,24 +25,34 @@ export default ({ data, pageContext, location }) => {
           })
           .slice(0, 70)}...`}
         pagepath={location.pathname}
-        blogimg={`https:${data.microcmsBlog.eyecatch.url}`}
-        pageimgw={data.microcmsBlog.fields.width}
-        pageimgh={data.microcmsBlog.fields.height}
+        blogimg={
+          existsEyecatch ? `https:${data.microcmsBlog.eyecatch.url}` : null
+        }
+        pageimgw={existsEyecatch ? data.microcmsBlog.fields.width : null}
+        pageimgh={existsEyecatch ? data.microcmsBlog.fields.height : null}
       />
       <div>
-        <div className="eyecatch">
-          <figure>
-            <div
-              className="eyecatch-wrapper"
-              style={{ paddingBottom: `${pb}%` }}
-            >
-              <Img
-                fluid={data.microcmsBlog.fields.featuredImage.fluid}
-                alt=""
-              />
-            </div>
-          </figure>
-        </div>
+        {data.microcmsBlog.eyecatch && (
+          <div className="eyecatch">
+            <figure>
+              <div
+                className="eyecatch-wrapper"
+                style={{
+                  paddingBottom: `${
+                    (data.microcmsBlog.fields.height /
+                      data.microcmsBlog.fields.width) *
+                    100
+                  }%`,
+                }}
+              >
+                <Img
+                  fluid={data.microcmsBlog.fields.featuredImage.fluid}
+                  alt=""
+                />
+              </div>
+            </figure>
+          </div>
+        )}
         <article className="content">
           <div className="container">
             <h1 className="bar">{data.microcmsBlog.title}</h1>
@@ -102,7 +74,7 @@ export default ({ data, pageContext, location }) => {
                 </ul>
               </div>
             </aside>
-            <div className="postbody">{renderAst(htmlAst)}</div>
+            <PostBody loopContents={data.microcmsBlog.content} />
             <ul className="postlink">
               {pageContext.next && (
                 <li className="prev">
@@ -160,7 +132,11 @@ export const query = graphql`
           }
         }
       }
-      content
+      content {
+        fieldId
+        richEditor
+        html
+      }
     }
   }
 `

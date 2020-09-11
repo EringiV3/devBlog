@@ -11,6 +11,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           node {
             id
             slug
+            eyecatch {
+              url
+            }
           }
           next {
             title
