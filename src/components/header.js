@@ -19,13 +19,10 @@ export default () => (
       <nav className="nav">
         <ul>
           <li>
-            <Link to={`/`}>TOP</Link>
+            <Link to={`/about/`}>About</Link>
           </li>
           <li>
-            <Link to={`/about/`}>ABOUT</Link>
-          </li>
-          <li>
-            <Link to={`/blog/`}>BLOG</Link>
+            <Link to={`/blog/`}>Blog</Link>
           </li>
           <li>
             <Link to={`/categories/`}>Categories</Link>
