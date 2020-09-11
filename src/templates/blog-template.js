@@ -7,32 +7,37 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Img from "gatsby-image"
 
 export default ({ data, location, pageContext }) => {
   return (
     <Layout>
       <SEO
         pagetitle="ブログ"
-        pagedesc="ESSENTIALSのブログです"
+        pagedesc="EringiV3のブログです"
         pagepath={location.pathname}
       />
       <section className="content bloglist">
         <div className="container">
-          <h1 className="bar">RECENT POSTS</h1>
+          <h1 className="bar">Blog</h1>
           <div className="posts">
             {data.allMicrocmsBlog.edges.map(({ node }) => (
               <article className="post" key={node.id}>
                 <Link to={`/blog/post/${node.slug}`}>
-                  <figure>
-                    <Img
-                      fluid={node.fields.featuredImage.fluid}
-                      alt=""
-                      style={{ height: "100%" }}
-                    />
-                  </figure>
                   <h3>{node.title}</h3>
                 </Link>
+                <div>
+                  <span>{node.publishDate}</span>
+                  {node.category.map(category => {
+                    return (
+                      <Link
+                        to={`/category/${category.categorySlug}/`}
+                        key={category.id}
+                      >
+                        <span>{category.category}</span>
+                      </Link>
+                    )
+                  })}
+                </div>
               </article>
             ))}
           </div>
@@ -79,19 +84,12 @@ export const query = graphql`
           title
           id
           slug
-          fields {
-            featuredImage {
-              fluid(maxWidth: 1600) {
-                aspectRatio
-                base64
-                sizes
-                src
-                srcSet
-                srcSetWebp
-                srcWebp
-              }
-            }
+          category {
+            category
+            categorySlug
+            id
           }
+          publishDate(formatString: "YYYY.MM.DD")
         }
       }
     }
