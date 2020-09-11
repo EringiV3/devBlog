@@ -1,9 +1,9 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import Image from "../components/image"
-import Imgix from "react-imgix"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Img from "gatsby-image"
 
 export default function Home({ data }) {
   return (
@@ -85,10 +85,10 @@ export default function Home({ data }) {
               <article className="post" key={node.id}>
                 <Link to={`/blog/post/${node.slug}`}>
                   <figure>
-                    <Imgix
-                      src={node.eyecatch.url}
-                      sizes="(max-width: 573px) 100vw, 573px"
-                      htmlAttributes={{ alt: "" }}
+                    <Img
+                      fluid={node.fields.featuredImage.fluid}
+                      alt=""
+                      style={{ height: "100%" }}
                     />
                   </figure>
                   <h3>{node.title}</h3>
@@ -114,8 +114,18 @@ export const query = graphql`
           title
           id
           slug
-          eyecatch {
-            url
+          fields {
+            featuredImage {
+              fluid(maxWidth: 1600) {
+                aspectRatio
+                base64
+                sizes
+                src
+                srcSet
+                srcSetWebp
+                srcWebp
+              }
+            }
           }
         }
       }

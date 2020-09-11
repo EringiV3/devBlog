@@ -17,6 +17,7 @@ import Imgix from "react-imgix"
 import unified from "unified"
 import parse from "rehype-parse"
 import rehypeReact from "rehype-react"
+import Img from "gatsby-image"
 
 const renderAst = new rehypeReact({
   createElement: React.createElement,
@@ -31,7 +32,9 @@ const renderAst = new rehypeReact({
       )
     },
     img: props => {
+      console.log({ props })
       return (
+        // TODO 削除する
         <Imgix
           src={props.src}
           sizes="(max-width: 785px) 100vw, 785px"
@@ -71,10 +74,9 @@ export default ({ data, pageContext, location }) => {
               className="eyecatch-wrapper"
               style={{ paddingBottom: `${pb}%` }}
             >
-              <Imgix
-                src={data.microcmsBlog.eyecatch.url}
-                sizes="(max-width: 1600px) 100vw, 1600px"
-                htmlAttributes={{ alt: "" }}
+              <Img
+                fluid={data.microcmsBlog.fields.featuredImage.fluid}
+                alt=""
               />
             </div>
           </figure>
@@ -146,6 +148,17 @@ export const query = graphql`
       fields {
         height
         width
+        featuredImage {
+          fluid(maxWidth: 1600) {
+            aspectRatio
+            base64
+            sizes
+            src
+            srcSet
+            srcSetWebp
+            srcWebp
+          }
+        }
       }
       content
     }
