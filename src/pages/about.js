@@ -35,6 +35,11 @@ export default ({ data, location }) => {
             </div>
           </div>
         </article>
+        <style jsx>{`
+          .postbody {
+            color: blue;
+          }
+        `}</style>
       </div>
     </Layout>
   )

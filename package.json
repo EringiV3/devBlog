@@ -31,6 +31,7 @@
     "gatsby-plugin-react-helmet": "^3.3.10",
     "gatsby-plugin-sharp": "^2.6.32",
     "gatsby-plugin-sitemap": "^2.4.12",
+    "gatsby-plugin-styled-jsx": "^3.3.11",
     "gatsby-source-filesystem": "^2.3.28",
     "gatsby-source-microcms": "^1.0.0",
     "gatsby-transformer-sharp": "^2.5.14",
@@ -43,6 +44,7 @@
     "react-imgix": "^9.0.2",
     "rehype-parse": "^7.0.1",
     "rehype-react": "^6.1.0",
+    "styled-jsx": "^3.3.0",
     "unified": "^9.2.0"
   },
   "devDependencies": {

@@ -103,5 +103,13 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-styled-jsx`,
+      options: {
+        optimizeForSpeed: true,
+        sourceMaps: false,
+        vendorPrefixes: true,
+      },
+    },
   ],
 }
