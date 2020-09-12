@@ -7,7 +7,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import ArticleCard from "../components/article-card"
+import PostList from "../components/post-list"
 import Title from "../components/title"
 
 export default ({ data, location, pageContext }) => {
@@ -22,9 +22,7 @@ export default ({ data, location, pageContext }) => {
         <div className="container">
           <Title title={`CATEGORY: ${pageContext.categoryName}`} />
           <div className="posts">
-            {data.allMicrocmsBlog.edges.map(({ node }) => (
-              <ArticleCard article={node} key={node.id} />
-            ))}
+            <PostList postList={data.allMicrocmsBlog.edges} />
           </div>
           <ul className="pagenation">
             {!pageContext.isFirst && (

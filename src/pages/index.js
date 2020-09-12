@@ -2,29 +2,34 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import ArticleCard from "../components/article-card"
+import Title from "../components/title"
+import AboutArticle from "../components/about-article"
+import PostList from "../components/post-list"
 
 export default function Home({ data }) {
   return (
     <Layout>
       <SEO />
-      <section>
-        Hi. I'm Lupin - currently teaching "Defense against the Dark Arts" at
-        Hogwarts, Great Britain. I recently published a book called Those nasty
-        Dementors. It teaches everything you need to know about defending
-        against Dementors.
-      </section>
-      <section>
-        <div className="container">
-          <h2>RECENT POSTS</h2>
+      <Title title="About" />
+      <AboutArticle />
+      <section className="latest-posts-container">
+        <div className="latest-posts-headline">
+          <h2>Latest Posts</h2>
           <Link to={`/blog/`}>Read all posts</Link>
-          <div className="posts">
-            {data.allMicrocmsBlog.edges.map(({ node }) => (
-              <ArticleCard article={node} key={node.id} />
-            ))}
-          </div>
+        </div>
+        <div className="posts">
+          <PostList postList={data.allMicrocmsBlog.edges} />
         </div>
       </section>
+      <style jsx>{`
+        .latest-posts-headline {
+          display: flex;
+          justify-content: space-between;
+        }
+        .latest-posts-container {
+          margin-top: 40px;
+        }
+      `}</style>
     </Layout>
   )
 }
