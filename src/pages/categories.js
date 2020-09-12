@@ -6,9 +6,10 @@ import Title from "../components/title"
 import { THEME_UI_COLOR_TEXT_COLOR, THEME_UI_COLOR_PRIMARY } from "../constants"
 
 const getBlogCategoryCount = (categorySlug, blogCategoryCountList) => {
-  return blogCategoryCountList.find(
+  const result = blogCategoryCountList.find(
     category => category.fieldValue === categorySlug
-  ).totalCount
+  )
+  return !result ? 0 : result.totalCount
 }
 
 export default ({ data, location }) => {
