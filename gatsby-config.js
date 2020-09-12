@@ -95,19 +95,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-imgix`,
-      options: {
-        domain: `images.microcms-assets.io`,
-        fields: [
-          {
-            nodeType: `MicrocmsBlog`,
-            fieldName: `featuredImage`,
-            getUrl: node => (node.eyecatch !== null ? node.eyecatch.url : ``),
-          },
-        ],
-      },
-    },
-    {
       resolve: `gatsby-plugin-styled-jsx`,
       options: {
         optimizeForSpeed: true,

@@ -11,9 +11,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           node {
             id
             slug
-            eyecatch {
-              url
-            }
           }
           next {
             title
@@ -103,24 +100,4 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
   })
-}
-
-exports.onCreateNode = async ({ node, actions }) => {
-  const { createNodeField } = actions
-  if (node.internal.type === `MicrocmsBlog` && node.eyecatch !== null) {
-    const results = await axios.get(`${node.eyecatch.url}?fm=json`)
-    const { data } = results
-
-    createNodeField({
-      node,
-      name: "width",
-      value: data.PixelWidth,
-    })
-
-    createNodeField({
-      node,
-      name: "height",
-      value: data.PixelHeight,
-    })
-  }
 }

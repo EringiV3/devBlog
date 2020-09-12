@@ -9,14 +9,12 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import htmlToText from "html-to-text"
-import Img from "gatsby-image"
 import PostBody from "../components/post-body"
 import Title from "../components/title"
 import Button from "../components/button"
 import { THEME_UI_COLOR_SECONDARY } from "../constants"
 
 export default ({ data, pageContext, location }) => {
-  const existsEyecatch = data.microcmsBlog.eyecatch !== null
   return (
     <>
       <Layout>
@@ -29,23 +27,8 @@ export default ({ data, pageContext, location }) => {
             })
             .slice(0, 70)}...`}
           pagepath={location.pathname}
-          blogimg={
-            existsEyecatch ? `https:${data.microcmsBlog.eyecatch.url}` : null
-          }
-          pageimgw={existsEyecatch ? data.microcmsBlog.fields.width : null}
-          pageimgh={existsEyecatch ? data.microcmsBlog.fields.height : null}
         />
         <div>
-          {data.microcmsBlog.eyecatch && (
-            <div className="eyecatch">
-              <figure>
-                <Img
-                  fluid={data.microcmsBlog.fields.featuredImage.fluid}
-                  alt=""
-                />
-              </figure>
-            </div>
-          )}
           <article className="content">
             <div className="container">
               <Title title={data.microcmsBlog.title} />
@@ -151,9 +134,6 @@ export default ({ data, pageContext, location }) => {
           position: relative;
           bottom: 5px;
         }
-        .eyecatch {
-          margin-top: 20px;
-        }
         .prev-post-name,
         .next-post-name {
           padding: 0 5px;
@@ -173,24 +153,6 @@ export const query = graphql`
         category
         categorySlug
         id
-      }
-      eyecatch {
-        url
-      }
-      fields {
-        height
-        width
-        featuredImage {
-          fluid(maxWidth: 1600) {
-            aspectRatio
-            base64
-            sizes
-            src
-            srcSet
-            srcSetWebp
-            srcWebp
-          }
-        }
       }
       content {
         fieldId
