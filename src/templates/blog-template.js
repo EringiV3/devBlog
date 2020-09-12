@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ArticleCard from "../components/article-card"
+import Title from "../components/title"
 
 export default ({ data, location, pageContext }) => {
   return (
@@ -19,7 +20,7 @@ export default ({ data, location, pageContext }) => {
       />
       <section className="content bloglist">
         <div className="container">
-          <h1 className="bar">Blog</h1>
+          <Title title="Blog" />
           <div className="posts">
             {data.allMicrocmsBlog.edges.map(({ node }) => (
               <ArticleCard article={node} key={node.id} />

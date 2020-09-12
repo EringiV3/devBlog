@@ -11,6 +11,7 @@ import {
 import htmlToText from "html-to-text"
 import Img from "gatsby-image"
 import PostBody from "../components/post-body"
+import Title from "../components/title"
 
 export default ({ data, pageContext, location }) => {
   const existsEyecatch = data.microcmsBlog.eyecatch !== null
@@ -55,7 +56,7 @@ export default ({ data, pageContext, location }) => {
         )}
         <article className="content">
           <div className="container">
-            <h1 className="bar">{data.microcmsBlog.title}</h1>
+            <Title title={data.microcmsBlog.title} />
             <aside className="info">
               <time dateTime={data.microcmsBlog.publishDate}>
                 <FontAwesomeIcon icon={faClock} />

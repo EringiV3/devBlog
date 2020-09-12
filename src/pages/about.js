@@ -1,6 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Title from "../components/title"
 
 // TODO microCMSにaboutのAPIを用意する
 export default ({ data, location }) => {
@@ -14,7 +15,7 @@ export default ({ data, location }) => {
       <div>
         <article className="content">
           <div className="container">
-            <h1 className="bar">About</h1>
+            <Title title="About" />
             <div className="postbody">
               Hi! Remus Lupin - also known as Moony - is currently teaching
               "Defense against the Dark Arts" at Hogwarts. He was afflicted with

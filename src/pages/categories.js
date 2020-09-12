@@ -2,6 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql, Link } from "gatsby"
+import Title from "../components/title"
 
 const getBlogCategoryCount = (categorySlug, blogCategoryCountList) => {
   return blogCategoryCountList.find(
@@ -13,7 +14,7 @@ export default ({ data, location }) => {
   return (
     <Layout>
       <SEO pagetitle="カテゴリ一覧ページ" pagepath={location.pathname} />
-      <h1 style={{ padding: "20vh 0", textAlign: "center" }}>Categories</h1>
+      <Title title="Categories" />
       {data.allMicrocmsCategory.nodes.map((node, i) => {
         return (
           <div key={i}>
