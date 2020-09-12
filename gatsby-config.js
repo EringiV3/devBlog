@@ -87,6 +87,10 @@ module.exports = {
               limit: 100,
             },
           },
+          {
+            endpoint: "about",
+            format: "object",
+          },
         ],
       },
     },
