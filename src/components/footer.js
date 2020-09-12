@@ -1,4 +1,5 @@
 import React from "react"
+import { THEME_UI_COLOR_LIGHT_GRAY, THEME_UI_COLOR_PRIMARY } from "../constants"
 
 export default () => {
   return (
@@ -12,7 +13,10 @@ export default () => {
         .footer {
           margin-top: 60px;
           padding-top: 15px;
-          border-top: 1px solid blue;
+          border-top: 1px solid ${THEME_UI_COLOR_LIGHT_GRAY};
+        }
+        .copyright {
+          color: ${THEME_UI_COLOR_PRIMARY};
         }
       `}</style>
     </>

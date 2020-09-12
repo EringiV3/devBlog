@@ -138,6 +138,9 @@ export default ({ data, pageContext, location }) => {
         .category-name:nth-of-type(n + 2):before {
           content: "・";
         }
+        .eyecatch {
+          margin-top: 20px;
+        }
       `}</style>
     </>
   )

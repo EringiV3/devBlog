@@ -7,6 +7,7 @@ export default ({ title }) => {
       <style jsx>{`
         .title {
           margin: 80px 0 20px 0;
+          font-size: 40px;
         }
       `}</style>
     </>

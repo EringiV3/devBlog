@@ -1,5 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
+import { THEME_UI_COLOR_TEXT_COLOR, THEME_UI_COLOR_PRIMARY } from "../constants"
+import Button from "../components/button"
 
 export default ({ postList }) => {
   return (
@@ -7,18 +9,20 @@ export default ({ postList }) => {
       {postList.map(({ node }) => (
         <article className="post" key={node.id}>
           <Link to={`/blog/post/${node.slug}`}>
-            <h3>{node.title}</h3>
+            <p className="post-title">{node.title}</p>
           </Link>
-          <div>
-            <span>{node.publishDate}</span>
+          <div className="post-info">
+            <span className="publish-date">{node.publishDate}</span>
             {node.category.map(category => {
               return (
-                <Link
-                  to={`/category/${category.categorySlug}/`}
-                  key={category.id}
-                >
-                  <span>{category.category}</span>
-                </Link>
+                <span className="button-wrapper">
+                  <Link
+                    to={`/category/${category.categorySlug}/`}
+                    key={category.id}
+                  >
+                    <Button label={category.category}></Button>
+                  </Link>
+                </span>
               )
             })}
           </div>
@@ -27,6 +31,20 @@ export default ({ postList }) => {
       <style jsx>{`
         .post {
           margin-top: 30px;
+        }
+        .post-title {
+          font-size: 22px;
+          color: ${THEME_UI_COLOR_TEXT_COLOR};
+        }
+        .publish-date {
+          font-size: 16px;
+          color: ${THEME_UI_COLOR_PRIMARY};
+        }
+        .post-info {
+          padding-top: 8px;
+        }
+        .button-wrapper {
+          padding: 0 5px;
         }
       `}</style>
     </>

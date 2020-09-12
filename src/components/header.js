@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { THEME_UI_COLOR_PRIMARY, THEME_UI_COLOR_LIGHT_GRAY } from "../constants"
 
 export default () => {
   return (
@@ -8,7 +9,7 @@ export default () => {
         <div className="container">
           <div className="site">
             <Link to={`/`}>
-              <h2>EringiV3 Dev</h2>
+              <h2 className="site-name">EringiV3 Dev</h2>
             </Link>
           </div>
           <nav className="nav">
@@ -40,10 +41,17 @@ export default () => {
         .nav-wrapper {
           display: flex;
           padding: 20px 0;
-          border-bottom: 1px solid blue;
+          border-bottom: 1px solid ${THEME_UI_COLOR_LIGHT_GRAY};
+        }
+        .nav-item {
+          color: ${THEME_UI_COLOR_PRIMARY};
+          font-weight: 400;
         }
         .nav-item:nth-of-type(n + 2) {
           padding-left: 20px;
+        }
+        .site-name {
+          font-weight: 400;
         }
       `}</style>
     </>

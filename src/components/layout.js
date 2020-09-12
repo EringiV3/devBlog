@@ -3,6 +3,11 @@ import Header from "./header"
 import Footer from "./footer"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
+import {
+  THEME_UI_COLOR_TEXT_COLOR,
+  THEME_UI_COLOR_SECONDARY,
+} from "../constants"
+
 config.autoAddCss = false
 
 export default ({ children }) => (
@@ -21,8 +26,11 @@ export default ({ children }) => (
     `}</style>
     <style jsx global>{`
       body {
-        font-family: sans-serif;
-        color: #222;
+        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+          "Hiragino Sans", Meiryo, sans-serif;
+        color: ${THEME_UI_COLOR_TEXT_COLOR};
+        font-weight: 400;
+        font-size: 18px;
       }
 
       body,
@@ -58,7 +66,6 @@ export default ({ children }) => (
         vertical-align: bottom;
       }
 
-
       .pagenation {
         margin-top: 1.8em;
         list-style: none;
@@ -87,61 +94,6 @@ export default ({ children }) => (
       .pagenation .next [class*="fa-"] {
         margin-left: 10px;
       }
-
-      /* コンテンツ */
-       {
-        /* .content {
-        padding-top: 50px;
-        padding-bottom: 40px;
-      }
-
-      .content .container {
-        max-width: 785px;
-      }
-
-      .content h1 {
-        margin-bottom: 25px;
-        font-size: 24px;
-      }
-
-      .postbody > * {
-        margin-bottom: 2em;
-      }
-      .postbody h2 {
-        margin-top: 2.5em;
-        margin-bottom: 1.5em;
-        font-size: 20px;
-      }
-      .postbody h2 [class*="fa-"] {
-        margin-right: 15px;
-        color: #477294;
-      }
-
-      .postbody p {
-        line-height: 1.8;
-      }
-      .postbody ul {
-        padding-left: 30px;
-      }
-      .postbody li:not(:last-child) {
-        margin-bottom: 1em;
-      }
-
-      @media (min-width: 768px) {
-        .content {
-          padding-top: 70px;
-          padding-bottom: 60px;
-        }
-
-        .content h1 {
-          margin-bottom: 40px;
-          font-size: 38px;
-        }
-
-        .postbody h2 {
-          font-size: 28px;
-        }
-      } */
     `}</style>
   </div>
 )

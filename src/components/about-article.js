@@ -1,6 +1,10 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import ReactHtmlParser from "react-html-parser"
+import {
+  THEME_UI_COLOR_SECONDARY,
+  THEME_UI_COLOR_TEXT_COLOR,
+} from "../constants"
 
 export default () => {
   const { microcmsAbout } = useStaticQuery(graphql`
@@ -19,6 +23,14 @@ export default () => {
           </div>
         </div>
       </article>
+      <style jsx>{`
+        .postbody a {
+          color: ${THEME_UI_COLOR_SECONDARY};
+        }
+        .postbody {
+          color: ${THEME_UI_COLOR_TEXT_COLOR};
+        }
+      `}</style>
     </>
   )
 }
