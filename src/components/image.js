@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
 /**
- * 引数で受け取った画像URLと一致する画像のfluidプロパティを返します
+ * 引数で受け取ったファイル名と一致する画像のfluidプロパティを返します
  * @param {string} assetUrl 画像URL
  */
 export default props => {

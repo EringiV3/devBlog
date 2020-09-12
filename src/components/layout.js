@@ -6,10 +6,15 @@ import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
 export default ({ children }) => (
-  <>
+  <div className="layout">
     <Header />
     {children}
     <Footer />
+    <style jsx>{`
+      .layout {
+        padding: 15px;
+      }
+    `}</style>
     <style jsx global>{`
       body {
         font-family: sans-serif;
@@ -167,5 +172,5 @@ export default ({ children }) => (
       } */
       }
     `}</style>
-  </>
+  </div>
 )
