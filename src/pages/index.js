@@ -20,7 +20,7 @@ export default function Home({ data }) {
           <Link to={`/blog/`}>Read all posts</Link>
           <div className="posts">
             {data.allMicrocmsBlog.edges.map(({ node }) => (
-              <ArticleCard article={node} />
+              <ArticleCard article={node} key={node.id} />
             ))}
           </div>
         </div>

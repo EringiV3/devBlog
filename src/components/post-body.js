@@ -25,7 +25,6 @@ const renderAst = new rehypeReact({
       )
     },
     img: props => {
-      console.log({ props })
       return (
         // TODO Imgixやめてgatsby-imageにしたい
         <Imgix

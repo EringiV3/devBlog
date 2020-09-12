@@ -14,9 +14,9 @@ export default ({ data, location }) => {
     <Layout>
       <SEO pagetitle="カテゴリ一覧ページ" pagepath={location.pathname} />
       <h1 style={{ padding: "20vh 0", textAlign: "center" }}>Categories</h1>
-      {data.allMicrocmsCategory.nodes.map(node => {
+      {data.allMicrocmsCategory.nodes.map((node, i) => {
         return (
-          <div>
+          <div key={i}>
             <Link to={`/category/${node.categorySlug}`}>
               {node.category}
               {`(${getBlogCategoryCount(

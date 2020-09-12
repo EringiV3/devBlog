@@ -22,7 +22,7 @@ export default ({ data, location, pageContext }) => {
           <h1 className="bar">Blog</h1>
           <div className="posts">
             {data.allMicrocmsBlog.edges.map(({ node }) => (
-              <ArticleCard article={node} />
+              <ArticleCard article={node} key={node.id} />
             ))}
           </div>
           <ul className="pagenation">
