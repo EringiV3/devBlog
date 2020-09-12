@@ -3,10 +3,7 @@ import Header from "./header"
 import Footer from "./footer"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
-import {
-  THEME_UI_COLOR_TEXT_COLOR,
-  THEME_UI_COLOR_SECONDARY,
-} from "../constants"
+import { THEME_UI_COLOR_TEXT_COLOR } from "../constants"
 
 config.autoAddCss = false
 
