@@ -119,20 +119,22 @@ export default ({ data, pageContext, location }) => {
         .info {
           display: flex;
           justify-content: space-between;
+          flex-direction: column;
         }
         .category-info {
+          margin-top: 30px;
           display: flex;
-          width: 50%;
-          justify-content: flex-end;
         }
         .category-list {
           list-style: none;
           display: flex;
           padding-left: 5px;
+          flex-wrap: wrap;
         }
         .category-name {
           position: relative;
           bottom: 5px;
+          padding: 0 5px;
         }
         .prev-post-name,
         .next-post-name {

@@ -36,6 +36,9 @@ export default ({ postList }) => {
           font-size: 22px;
           color: ${THEME_UI_COLOR_TEXT_COLOR};
         }
+        .post-title:hover {
+          opacity: 0.8;
+        }
         .publish-date {
           font-size: 16px;
           color: ${THEME_UI_COLOR_PRIMARY};

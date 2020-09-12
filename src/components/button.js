@@ -7,6 +7,7 @@ export default ({ label }) => {
       <button className="button">{label}</button>
       <style jsx>{`
         .button {
+          margin-top: 5px;
           cursor: pointer;
           color: #fff;
           background-color: ${THEME_UI_COLOR_SECONDARY};

@@ -50,7 +50,7 @@ export default ({ loopContents }) => {
       </div>
       <style jsx>{`
         .postbody {
-          padding-top: 60px;
+          margin-top: 40px;
         }
       `}</style>
     </>
