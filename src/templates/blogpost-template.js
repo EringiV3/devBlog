@@ -12,6 +12,8 @@ import htmlToText from "html-to-text"
 import Img from "gatsby-image"
 import PostBody from "../components/post-body"
 import Title from "../components/title"
+import Button from "../components/button"
+import { THEME_UI_COLOR_SECONDARY } from "../constants"
 
 export default ({ data, pageContext, location }) => {
   const existsEyecatch = data.microcmsBlog.eyecatch !== null
@@ -50,7 +52,9 @@ export default ({ data, pageContext, location }) => {
               <aside className="info">
                 <time dateTime={data.microcmsBlog.publishDate}>
                   <FontAwesomeIcon icon={faClock} />
-                  {data.microcmsBlog.publishDateJP}
+                  <span className="publish-date">
+                    {data.microcmsBlog.publishDateJP}
+                  </span>
                 </time>
                 <div className="category-info">
                   <FontAwesomeIcon icon={faFolderOpen} />
@@ -58,7 +62,7 @@ export default ({ data, pageContext, location }) => {
                     {data.microcmsBlog.category.map(category => (
                       <li className="category-name" key={category.id}>
                         <Link to={`/category/${category.categorySlug}/`}>
-                          {category.category}
+                          <Button label={category.category} />
                         </Link>
                       </li>
                     ))}
@@ -71,7 +75,9 @@ export default ({ data, pageContext, location }) => {
                   <li className="prev-post-link">
                     <Link to={`/blog/post/${pageContext.next.slug}`} rel="prev">
                       <FontAwesomeIcon icon={faChevronLeft} />
-                      <span>{pageContext.next.title}</span>
+                      <span className="prev-post-name">
+                        {pageContext.next.title}
+                      </span>
                     </Link>
                   </li>
                 )}
@@ -81,7 +87,9 @@ export default ({ data, pageContext, location }) => {
                       to={`/blog/post/${pageContext.previous.slug}`}
                       rel="next"
                     >
-                      <span>{pageContext.previous.title}</span>
+                      <span className="next-post-name">
+                        {pageContext.previous.title}
+                      </span>
                       <FontAwesomeIcon icon={faChevronRight} />
                     </Link>
                   </li>
@@ -92,10 +100,13 @@ export default ({ data, pageContext, location }) => {
         </div>
       </Layout>
       <style jsx>{`
+        .publish-date {
+          padding-left: 5px;
+        }
         .postlink-container {
           margin-top: 4em;
           list-style: none;
-          color: #477294;
+          color: ${THEME_UI_COLOR_SECONDARY};
           font-size: 14px;
           display: flex;
         }
@@ -134,12 +145,18 @@ export default ({ data, pageContext, location }) => {
         .category-list {
           list-style: none;
           display: flex;
+          padding-left: 5px;
         }
-        .category-name:nth-of-type(n + 2):before {
-          content: "・";
+        .category-name {
+          position: relative;
+          bottom: 5px;
         }
         .eyecatch {
           margin-top: 20px;
+        }
+        .prev-post-name,
+        .next-post-name {
+          padding: 0 5px;
         }
       `}</style>
     </>
