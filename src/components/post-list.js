@@ -25,8 +25,8 @@ export default ({ postList }) => {
         </article>
       ))}
       <style jsx>{`
-        .postbody {
-          color: blue;
+        .post {
+          margin-top: 30px;
         }
       `}</style>
     </>

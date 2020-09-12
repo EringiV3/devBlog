@@ -15,7 +15,9 @@ export default function Home({ data }) {
       <section className="latest-posts-container">
         <div className="latest-posts-headline">
           <h2>Latest Posts</h2>
-          <Link to={`/blog/`}>Read all posts</Link>
+          <Link to={`/blog/`}>
+            <span className="list-link">Read all posts</span>
+          </Link>
         </div>
         <div className="posts">
           <PostList postList={data.allMicrocmsBlog.edges} />
@@ -25,9 +27,15 @@ export default function Home({ data }) {
         .latest-posts-headline {
           display: flex;
           justify-content: space-between;
+          border-bottom: 1px solid blue;
+          padding: 20px 0;
         }
         .latest-posts-container {
           margin-top: 40px;
+        }
+        .list-link {
+          position: relative;
+          top: 7px;
         }
       `}</style>
     </Layout>

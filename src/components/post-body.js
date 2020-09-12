@@ -42,19 +42,26 @@ export default ({ loopContents }) => {
     Prism.highlightAll()
   }, [])
   return (
-    <div className="postbody">
-      {loopContents.map((content, i) => {
-        if (content.fieldId === LOOP_CONTENT_FIELD_ID_RICH_EDITOR) {
-          const htmlAst = unified()
-            .use(parse, { fragment: true })
-            .parse(content.richEditor)
-          return <div key={i}>{renderAst(htmlAst)}</div>
-        } else if (content.fieldId === LOOP_CONTENT_FIELD_ID_HTML) {
-          return <div key={i}>{ReactHtmlParser(content.html)}</div>
-        } else {
-          return null
+    <>
+      <div className="postbody">
+        {loopContents.map((content, i) => {
+          if (content.fieldId === LOOP_CONTENT_FIELD_ID_RICH_EDITOR) {
+            const htmlAst = unified()
+              .use(parse, { fragment: true })
+              .parse(content.richEditor)
+            return <div key={i}>{renderAst(htmlAst)}</div>
+          } else if (content.fieldId === LOOP_CONTENT_FIELD_ID_HTML) {
+            return <div key={i}>{ReactHtmlParser(content.html)}</div>
+          } else {
+            return null
+          }
+        })}
+      </div>
+      <style jsx>{`
+        .postbody {
+          padding-top: 60px;
         }
-      })}
-    </div>
+      `}</style>
+    </>
   )
 }

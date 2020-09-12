@@ -8,11 +8,15 @@ config.autoAddCss = false
 export default ({ children }) => (
   <div className="layout">
     <Header />
-    {children}
+    <div className="content">{children}</div>
     <Footer />
     <style jsx>{`
       .layout {
         padding: 15px;
+        max-width: 1024px;
+        width: 100%;
+        margin: 0px auto;
+        box-sizing: border-box;
       }
     `}</style>
     <style jsx global>{`
@@ -52,6 +56,36 @@ export default ({ children }) => (
 
       svg {
         vertical-align: bottom;
+      }
+
+
+      .pagenation {
+        margin-top: 1.8em;
+        list-style: none;
+        display: flex;
+      }
+
+      .pagenation .next {
+        margin-left: auto;
+      }
+
+      .pagenation a {
+        width: 7em;
+        padding: 0.5em 1em;
+        border-radius: 1em;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+      }
+      .pagenation .next a {
+        justify-content: flex-end;
+      }
+
+      .pagenation .prev [class*="fa-"] {
+        margin-right: 10px;
+      }
+      .pagenation .next [class*="fa-"] {
+        margin-left: 10px;
       }
 
       /* コンテンツ */
@@ -107,70 +141,7 @@ export default ({ children }) => (
         .postbody h2 {
           font-size: 28px;
         }
-      }
-
-      .postlink {
-        margin-top: 4em;
-        list-style: none;
-        color: #477294;
-        font-size: 14px;
-        display: flex;
-      }
-
-      .postlink li {
-        width: 48%;
-        display: flex;
-        align-items: center;
-      }
-
-      .postlink a {
-        display: flex;
-        align-items: center;
-      }
-
-      .postlink .next {
-        margin-left: auto;
-        justify-content: flex-end;
-      }
-
-      .postlink .prev [class*="fa-"] {
-        margin-right: 10px;
-      }
-      .postlink .next [class*="fa-"] {
-        margin-left: 10px;
-      }
-
-      .pagenation {
-        margin-top: 1.8em;
-        list-style: none;
-        display: flex;
-      }
-
-      .pagenation .next {
-        margin-left: auto;
-      }
-
-      .pagenation a {
-        width: 7em;
-        padding: 0.5em 1em;
-        border-radius: 1em;
-        background-color: #477294;
-        color: #fff;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-      }
-      .pagenation .next a {
-        justify-content: flex-end;
-      }
-
-      .pagenation .prev [class*="fa-"] {
-        margin-right: 10px;
-      }
-      .pagenation .next [class*="fa-"] {
-        margin-left: 10px;
       } */
-      }
     `}</style>
   </div>
 )
