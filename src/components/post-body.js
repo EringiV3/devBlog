@@ -6,24 +6,15 @@ import Imgix from "react-imgix"
 import unified from "unified"
 import parse from "rehype-parse"
 import rehypeReact from "rehype-react"
-import { faCheckSquare } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-
-const LOOP_CONTENT_FIELD_ID_RICH_EDITOR = "richEditor"
-const LOOP_CONTENT_FIELD_ID_HTML = "html"
+import {
+  LOOP_CONTENT_FIELD_ID_RICH_EDITOR,
+  LOOP_CONTENT_FIELD_ID_HTML,
+} from "../constants"
 
 const renderAst = new rehypeReact({
   createElement: React.createElement,
   Fragment: React.Fragment,
   components: {
-    h2: props => {
-      return (
-        <h2>
-          <FontAwesomeIcon icon={faCheckSquare} />
-          {props.children}
-        </h2>
-      )
-    },
     img: props => {
       return (
         // TODO Imgixやめてgatsby-imageにしたい
