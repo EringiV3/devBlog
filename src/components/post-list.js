@@ -15,11 +15,8 @@ export default ({ postList }) => {
             <span className="publish-date">{node.publishDate}</span>
             {node.category.map(category => {
               return (
-                <span className="button-wrapper">
-                  <Link
-                    to={`/category/${category.categorySlug}/`}
-                    key={category.id}
-                  >
+                <span className="button-wrapper" key={category.id}>
+                  <Link to={`/category/${category.categorySlug}/`}>
                     <Button label={category.category}></Button>
                   </Link>
                 </span>
