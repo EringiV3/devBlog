@@ -28,6 +28,9 @@ export default ({ children }) => (
        {
         /* グローバル領域に書くのやめたい ここから */
       }
+      .postbody {
+        word-break: break-word;
+      }
       .postbody h1 {
         margin-top: 60px;
         margin-bottom: 10px;
