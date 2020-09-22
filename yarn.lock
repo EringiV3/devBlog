@@ -6490,6 +6490,13 @@ gatsby-plugin-typescript@^2.4.18:
     "@babel/runtime" "^7.10.3"
     babel-plugin-remove-graphql-queries "^2.9.17"
 
+gatsby-query-params@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/gatsby-query-params/-/gatsby-query-params-1.2.1.tgz#2cfdb20b21fc6f8a44c850d594c14898cc1dc1dc"
+  integrity sha512-WFDpy/bCk7T7afuLWGpY0iW5UKpuoZm1cCHI2FfdbO2KDOdcyxjqrixUmItoaduReaDCCLPSh6fx+hc/uOw1Kw==
+  dependencies:
+    query-string "^6.11.1"
+
 gatsby-react-router-scroll@^3.0.12:
   version "3.0.12"
   resolved "https://registry.yarnpkg.com/gatsby-react-router-scroll/-/gatsby-react-router-scroll-3.0.12.tgz#1c6a7c3fd2d54ec618f42a6e793ff8293070b6bc"
@@ -11292,6 +11299,15 @@ query-string@^5.0.1:
     decode-uri-component "^0.2.0"
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
+
+query-string@^6.11.1:
+  version "6.13.2"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.13.2.tgz#3585aa9412c957cbd358fd5eaca7466f05586dda"
+  integrity sha512-BMmDaUiLDFU1hlM38jTFcRt7HYiGP/zt1sRzrIWm5zpeEuO1rkbPS0ELI3uehoLuuhHDCS8u8lhFN3fEN4JzPQ==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
 
 query-string@^6.13.1:
   version "6.13.1"
