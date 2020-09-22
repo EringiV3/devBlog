@@ -76,8 +76,8 @@ module.exports = {
     {
       resolve: "gatsby-source-microcms",
       options: {
-        apiKey: process.env.microCMS_API_KEY,
-        serviceId: process.env.microCMS_SERVICE_ID,
+        apiKey: process.env.MICRO_CMS_API_KEY,
+        serviceId: "eringiv3devblog",
         apis: [
           {
             endpoint: "blog",

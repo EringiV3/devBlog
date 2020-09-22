@@ -11,10 +11,10 @@ export default () => {
   useEffect(() => {
     if (!contentId || !draftKey) return
     fetch(
-      `https://${process.env.microCMS_SERVICE_ID}.microcms.io/api/v1/blog/${contentId}?draftKey=${draftKey}`,
+      `https://${process.env.GATSBY_MICRO_CMS_SERVICE_ID}.microcms.io/api/v1/blog/${contentId}?draftKey=${draftKey}`,
       {
         headers: {
-          "X-API-KEY": process.env.microCMS_API_KEY,
+          "X-API-KEY": process.env.MICRO_CMS_API_KEY,
         },
       }
     )
