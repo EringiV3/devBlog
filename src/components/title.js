@@ -8,6 +8,7 @@ export default ({ title }) => {
         .title {
           margin: 80px 0 20px 0;
           font-size: 40px;
+          width: 100%;
         }
       `}</style>
     </>
