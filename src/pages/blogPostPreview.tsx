@@ -4,12 +4,38 @@ import PostHeader from "../components/PostHeader"
 import PostBody from "../components/PostBody"
 import Layout from "../components/Layout"
 
+type BaseCmsProperties = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+type Category = BaseCmsProperties & {
+  category: string
+  categorySlug: string
+}
+
+type Content = {
+  fieldId: string
+  html?: string
+  richEditor?: string
+}
+
+type BlogPost = BaseCmsProperties & {
+  title: string
+  slug: string
+  publishDate: string
+  content: Array<Content>
+  category: Array<Category>
+}
+
 const BlogPostPreviewPage: React.FC = () => {
   const {
     contentId,
     draftKey,
   }: { contentId: string; draftKey: string } = getSearchParams()
-  const [postData, setPostData] = useState<null>(null)
+  const [postData, setPostData] = useState<null | BlogPost>(null)
 
   useEffect(() => {
     if (!contentId || !draftKey) return

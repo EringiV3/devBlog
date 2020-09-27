@@ -2,8 +2,24 @@ import React from "react"
 import { Link } from "gatsby"
 import { THEME_UI_COLOR_TEXT_COLOR, THEME_UI_COLOR_PRIMARY } from "../constants"
 import Button from "./Button"
+import {
+  MicrocmsBlog,
+  MicrocmsBlogCategory,
+  Maybe,
+} from "../../types/graphql-types"
 
-type Props = { postList: Array<any> }
+type Props = {
+  postList: Array<{
+    node: Pick<MicrocmsBlog, "title" | "id" | "slug" | "publishDate"> & {
+      category?:
+        | Maybe<
+            Pick<MicrocmsBlogCategory, "id" | "category" | "categorySlug">
+          >[]
+        | null
+        | undefined
+    }
+  }>
+}
 const PostList: React.FC<Props> = ({ postList }) => {
   return (
     <>
@@ -14,15 +30,19 @@ const PostList: React.FC<Props> = ({ postList }) => {
           </Link>
           <div className="post-info">
             <span className="publish-date">{node.publishDate}</span>
-            {node.category.map((category: any) => {
-              return (
-                <span className="button-wrapper" key={category.id}>
-                  <Link to={`/category/${category.categorySlug}/`}>
-                    <Button label={category.category}></Button>
-                  </Link>
-                </span>
-              )
-            })}
+            {node && node.category
+              ? node.category.map((category: Maybe<MicrocmsBlogCategory>) => {
+                  return category &&
+                    category.categorySlug &&
+                    category.category ? (
+                    <span className="button-wrapper" key={category?.id}>
+                      <Link to={`/category/${category.categorySlug}/`}>
+                        <Button label={category.category}></Button>
+                      </Link>
+                    </span>
+                  ) : null
+                })
+              : null}
           </div>
         </article>
       ))}

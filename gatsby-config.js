@@ -27,6 +27,12 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
+    {
+      resolve: "gatsby-plugin-graphql-codegen",
+      options: {
+        fileName: `types/graphql-types.d.ts`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

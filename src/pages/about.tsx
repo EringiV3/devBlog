@@ -3,11 +3,9 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import Title from "../components/Title"
 import About from "../components/About"
+import { IPageProps } from "../../types/page-props"
 
-type Props = {
-  location: any
-}
-const AboutPage: React.FC<Props> = ({ location }) => {
+const AboutPage: React.FC<IPageProps> = ({ location }) => {
   return (
     <Layout>
       <SEO

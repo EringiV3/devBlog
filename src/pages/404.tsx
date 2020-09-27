@@ -2,12 +2,9 @@ import React from "react"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import Title from "../components/Title"
+import { IPageProps } from "../../types/page-props"
 
-type Location = {
-  pathname: string
-}
-type Props = { location: Location }
-const NotFoundPage: React.FC<Props> = ({ location }) => {
+const NotFoundPage: React.FC<IPageProps> = ({ location }) => {
   return (
     <Layout>
       <SEO pagetitle="ページが見つかりません" pagepath={location.pathname} />

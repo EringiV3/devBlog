@@ -4,12 +4,16 @@ import Title from "./Title"
 import Button from "./Button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
+import { MicrocmsBlogCategory, Maybe } from "../../types/graphql-types"
 
 type Props = {
   title: string
   publishDate: string
   publishDateJP: string
-  category: Array<any>
+  category:
+    | Maybe<Pick<MicrocmsBlogCategory, "id" | "category" | "categorySlug">>[]
+    | null
+    | undefined
 }
 const PostHeader: React.FC<Props> = ({
   title,
@@ -28,13 +32,24 @@ const PostHeader: React.FC<Props> = ({
         <div className="category-info">
           <FontAwesomeIcon icon={faFolderOpen} />
           <ul className="category-list">
-            {category.map(category => (
-              <li className="category-name" key={category.id}>
-                <Link to={`/category/${category.categorySlug}/`}>
-                  <Button label={category.category} />
-                </Link>
-              </li>
-            ))}
+            {category &&
+              category.map(
+                (
+                  category: Maybe<
+                    Pick<
+                      MicrocmsBlogCategory,
+                      "id" | "category" | "categorySlug"
+                    >
+                  >
+                ) =>
+                  category?.categorySlug && category?.category ? (
+                    <li className="category-name" key={category.id}>
+                      <Link to={`/category/${category.categorySlug}/`}>
+                        <Button label={category.category} />
+                      </Link>
+                    </li>
+                  ) : null
+              )}
           </ul>
         </div>
       </aside>

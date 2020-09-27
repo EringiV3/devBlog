@@ -9,62 +9,73 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import PostList from "../components/PostList"
 import Title from "../components/Title"
+import { IPageProps } from "../../types/page-props"
+import { BlogTemplateQuery } from "../../types/graphql-types"
 
 type Props = {
-  data: any
-  location: any
-  pageContext: any
+  data: BlogTemplateQuery
 }
-const BlogTemplate: React.FC<Props> = ({ data, location, pageContext }) => {
+const BlogTemplate: React.FC<Props & IPageProps> = ({
+  data,
+  location,
+  pageContext,
+}) => {
   return (
-    <>
-      <Layout>
-        <SEO
-          pagetitle="ブログ"
-          pagedesc="EringiV3のブログです"
-          pagepath={location.pathname}
-        />
-        <section className="content bloglist">
-          <div className="container">
-            <Title title="Blog" />
-            <div className="posts">
-              <PostList postList={data.allMicrocmsBlog.edges} />
+    <Layout>
+      {pageContext && pageContext.currentPage && pageContext.currentPage ? (
+        <>
+          <SEO
+            pagetitle="ブログ"
+            pagedesc="EringiV3のブログです"
+            pagepath={location.pathname}
+          />
+          <section className="content bloglist">
+            <div className="container">
+              <Title title="Blog" />
+              <div className="posts">
+                <PostList postList={data.allMicrocmsBlog.edges} />
+              </div>
+              <ul className="pagenation">
+                {!pageContext.isFirst && (
+                  <li className="prev">
+                    <Link
+                      to={
+                        pageContext.currentPage === 2
+                          ? `/blog/`
+                          : `/blog/${pageContext.currentPage - 1}`
+                      }
+                      rel="prev"
+                    >
+                      <FontAwesomeIcon icon={faChevronLeft} />
+                      <span>前のページ</span>
+                    </Link>
+                  </li>
+                )}
+                {!pageContext.isLast && (
+                  <li className="next">
+                    <Link
+                      to={`/blog/${pageContext.currentPage + 1}`}
+                      rel="next"
+                    >
+                      <span>次のページ</span>
+                      <FontAwesomeIcon icon={faChevronRight} />
+                    </Link>
+                  </li>
+                )}
+              </ul>
             </div>
-            <ul className="pagenation">
-              {!pageContext.isFirst && (
-                <li className="prev">
-                  <Link
-                    to={
-                      pageContext.currentPage === 2
-                        ? `/blog/`
-                        : `/blog/${pageContext.currentPage - 1}`
-                    }
-                    rel="prev"
-                  >
-                    <FontAwesomeIcon icon={faChevronLeft} />
-                    <span>前のページ</span>
-                  </Link>
-                </li>
-              )}
-              {!pageContext.isLast && (
-                <li className="next">
-                  <Link to={`/blog/${pageContext.currentPage + 1}`} rel="next">
-                    <span>次のページ</span>
-                    <FontAwesomeIcon icon={faChevronRight} />
-                  </Link>
-                </li>
-              )}
-            </ul>
-          </div>
-        </section>
-      </Layout>
-    </>
+          </section>
+        </>
+      ) : (
+        "ERROR"
+      )}
+    </Layout>
   )
 }
 export default BlogTemplate
 
 export const query = graphql`
-  query($skip: Int!, $limit: Int!) {
+  query BlogTemplate($skip: Int!, $limit: Int!) {
     allMicrocmsBlog(
       sort: { order: DESC, fields: publishDate }
       skip: $skip

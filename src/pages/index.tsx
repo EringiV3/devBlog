@@ -6,11 +6,13 @@ import Title from "../components/Title"
 import About from "../components/About"
 import PostList from "../components/PostList"
 import { THEME_UI_COLOR_PRIMARY, THEME_UI_COLOR_LIGHT_GRAY } from "../constants"
+import { IndexQuery } from "../../types/graphql-types"
+import { IPageProps } from "../../types/page-props"
 
 type Props = {
-  data: any
+  data: IndexQuery
 }
-const IndexPage: React.FC<Props> = ({ data }) => {
+const IndexPage: React.FC<Props & IPageProps> = ({ data }) => {
   return (
     <Layout>
       <SEO />
@@ -61,7 +63,7 @@ const IndexPage: React.FC<Props> = ({ data }) => {
 export default IndexPage
 
 export const query = graphql`
-  query {
+  query Index {
     allMicrocmsBlog(
       sort: { order: DESC, fields: publishDate }
       skip: 0

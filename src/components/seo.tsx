@@ -3,15 +3,15 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 type Props = {
-  pagetitle?: string
-  pagedesc?: string
-  pagepath?: string
-  pageimg?: string
-  pageimgw?: number
-  pageimgh?: number
-  blogimg?: string
+  pagetitle: string | null
+  pagedesc: string | null
+  pagepath: string | null
+  pageimg: string | null
+  pageimgw: number | null
+  pageimgh: number | null
+  blogimg: string | null
 }
-const SEO: React.FC<Props> = ({
+const SEO: React.FC<Partial<Props>> = ({
   pagetitle,
   pagedesc,
   pagepath,
@@ -23,7 +23,7 @@ const SEO: React.FC<Props> = ({
   const {
     site: { siteMetadata },
   } = useStaticQuery(graphql`
-    query {
+    query Seo {
       site {
         siteMetadata {
           title

@@ -11,34 +11,49 @@ import htmlToText from "html-to-text"
 import PostBody from "../components/PostBody"
 import { THEME_UI_COLOR_SECONDARY } from "../constants"
 import PostHeader from "../components/PostHeader"
+import {
+  BlogPostTemplateQuery,
+  SitePageContext,
+} from "../../types/graphql-types"
+import { IPageProps } from "../../types/page-props"
 
 type Props = {
-  data: any
-  location: any
-  pageContext: any
+  data: BlogPostTemplateQuery
 }
-const BlogPostTemplate: React.FC<Props> = ({ data, pageContext, location }) => {
+
+const getPageDesc = (htmlString: string | null | undefined): string | null => {
+  if (htmlString === null || htmlString === undefined) {
+    return null
+  }
+  return `${htmlToText
+    .fromString(htmlString, {
+      ignoreImage: true,
+      ignoreHref: true,
+    })
+    .slice(0, 70)}...`
+}
+
+const BlogPostTemplate: React.FC<Props & IPageProps> = ({
+  data,
+  pageContext,
+  location,
+}) => {
   return (
     <>
       <Layout>
         <SEO
-          pagetitle={data.microcmsBlog.title}
-          pagedesc={`${htmlToText
-            .fromString(data.microcmsBlog.content, {
-              ignoreImage: true,
-              ignoreHref: true,
-            })
-            .slice(0, 70)}...`}
+          pagetitle={data.microcmsBlog?.title}
+          pagedesc={getPageDesc(data.microcmsBlog?.content)}
           pagepath={location.pathname}
         />
         <article className="content">
           <PostHeader
-            title={data.microcmsBlog.title}
-            publishDate={data.microcmsBlog.publishDate}
-            publishDateJP={data.microcmsBlog.publishDateJP}
-            category={data.microcmsBlog.category}
+            title={data.microcmsBlog?.title ?? ""}
+            publishDate={data.microcmsBlog?.publishDate}
+            publishDateJP={data.microcmsBlog?.publishDateJP}
+            category={data.microcmsBlog?.category ?? []}
           />
-          <PostBody loopContents={data.microcmsBlog.content} />
+          <PostBody loopContents={data.microcmsBlog?.content ?? []} />
           <PostBottomContent pageContext={pageContext} />
         </article>
       </Layout>
@@ -48,7 +63,9 @@ const BlogPostTemplate: React.FC<Props> = ({ data, pageContext, location }) => {
 
 export default BlogPostTemplate
 
-const PostBottomContent: React.FC<{ pageContext: any }> = ({ pageContext }) => (
+const PostBottomContent: React.FC<{ pageContext: SitePageContext }> = ({
+  pageContext,
+}) => (
   <>
     <ul className="postlink-container">
       {pageContext.next && (
@@ -108,7 +125,7 @@ const PostBottomContent: React.FC<{ pageContext: any }> = ({ pageContext }) => (
 )
 
 export const query = graphql`
-  query($id: String!) {
+  query BlogPostTemplate($id: String!) {
     microcmsBlog(id: { eq: $id }) {
       title
       publishDateJP: publishDate(formatString: "YYYY年MM月DD日")
