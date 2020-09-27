@@ -1,10 +1,13 @@
 import React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Title from "../components/title"
-import AboutArticle from "../components/about-article"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
+import Title from "../components/Title"
+import About from "../components/About"
 
-export default ({ data, location }) => {
+type Props = {
+  location: any
+}
+const AboutPage: React.FC<Props> = ({ location }) => {
   return (
     <Layout>
       <SEO
@@ -13,7 +16,8 @@ export default ({ data, location }) => {
         pagepath={location.pathname}
       />
       <Title title="About" />
-      <AboutArticle />
+      <About />
     </Layout>
   )
 }
+export default AboutPage

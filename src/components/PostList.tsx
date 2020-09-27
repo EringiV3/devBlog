@@ -1,9 +1,10 @@
 import React from "react"
 import { Link } from "gatsby"
 import { THEME_UI_COLOR_TEXT_COLOR, THEME_UI_COLOR_PRIMARY } from "../constants"
-import Button from "../components/button"
+import Button from "./Button"
 
-export default ({ postList }) => {
+type Props = { postList: Array<any> }
+const PostList: React.FC<Props> = ({ postList }) => {
   return (
     <>
       {postList.map(({ node }) => (
@@ -13,7 +14,7 @@ export default ({ postList }) => {
           </Link>
           <div className="post-info">
             <span className="publish-date">{node.publishDate}</span>
-            {node.category.map(category => {
+            {node.category.map((category: any) => {
               return (
                 <span className="button-wrapper" key={category.id}>
                   <Link to={`/category/${category.categorySlug}/`}>
@@ -50,3 +51,4 @@ export default ({ postList }) => {
     </>
   )
 }
+export default PostList

@@ -1,11 +1,22 @@
 import React from "react"
 import { faClock, faFolderOpen } from "@fortawesome/free-solid-svg-icons"
-import Title from "../components/title"
-import Button from "../components/button"
+import Title from "./Title"
+import Button from "./Button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
 
-export default ({ title, publishDate, publishDateJP, category }) => {
+type Props = {
+  title: string
+  publishDate: string
+  publishDateJP: string
+  category: Array<any>
+}
+const PostHeader: React.FC<Props> = ({
+  title,
+  publishDate,
+  publishDateJP,
+  category,
+}) => {
   return (
     <>
       <Title title={title} />
@@ -55,3 +66,5 @@ export default ({ title, publishDate, publishDateJP, category }) => {
     </>
   )
 }
+
+export default PostHeader

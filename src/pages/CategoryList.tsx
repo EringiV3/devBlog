@@ -1,18 +1,26 @@
 import React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
 import { graphql, Link } from "gatsby"
-import Title from "../components/title"
+import Title from "../components/Title"
 import { THEME_UI_COLOR_TEXT_COLOR, THEME_UI_COLOR_PRIMARY } from "../constants"
 
-const getBlogCategoryCount = (categorySlug, blogCategoryCountList) => {
+const getBlogCategoryCount = (
+  categorySlug: string,
+  blogCategoryCountList: Array<any>
+): number => {
   const result = blogCategoryCountList.find(
     category => category.fieldValue === categorySlug
   )
   return !result ? 0 : result.totalCount
 }
 
-export default ({ data, location }) => {
+type Props = {
+  data: any
+  location: any
+}
+
+const CategoryListPage: React.FC<Props> = ({ data, location }) => {
   return (
     <>
       <Layout>
@@ -50,6 +58,8 @@ export default ({ data, location }) => {
     </>
   )
 }
+
+export default CategoryListPage
 
 export const query = graphql`
   query {

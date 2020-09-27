@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react"
 import { getSearchParams } from "gatsby-query-params"
-import PostHeader from "../components/post-header"
-import PostBody from "../components/post-body"
-import Layout from "../components/layout"
+import PostHeader from "../components/PostHeader"
+import PostBody from "../components/PostBody"
+import Layout from "../components/Layout"
 
-export default () => {
-  const { contentId, draftKey } = getSearchParams()
-  const [postData, setPostData] = useState(null)
+const BlogPostPreviewPage: React.FC = () => {
+  const {
+    contentId,
+    draftKey,
+  }: { contentId: string; draftKey: string } = getSearchParams()
+  const [postData, setPostData] = useState<null>(null)
 
   useEffect(() => {
     if (!contentId || !draftKey) return
@@ -22,10 +25,11 @@ export default () => {
         if (response.ok) {
           return response.json()
         }
+        return null
       })
-      .then(json => {
-        if (json) {
-          setPostData(json)
+      .then((data: any) => {
+        if (data !== null) {
+          setPostData(data)
         }
       })
   }, [contentId, draftKey])
@@ -44,3 +48,4 @@ export default () => {
     <div>loading...</div>
   )
 }
+export default BlogPostPreviewPage

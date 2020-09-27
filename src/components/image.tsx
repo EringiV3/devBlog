@@ -2,11 +2,12 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
-/**
- * 引数で受け取ったファイル名と一致する画像のfluidプロパティを返します
- * @param {string} assetUrl 画像URL
- */
-export default props => {
+type Props = {
+  filename: string
+  alt: string
+  style: object
+}
+const Image: React.FC<Props> = props => {
   const { allImageSharp } = useStaticQuery(graphql`
     query {
       allImageSharp {
@@ -34,3 +35,5 @@ export default props => {
     </figure>
   )
 }
+
+export default Image

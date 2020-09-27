@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { THEME_UI_COLOR_PRIMARY, THEME_UI_COLOR_LIGHT_GRAY } from "../constants"
 
-export default () => {
+const Header: React.FC = () => {
   return (
     <>
       <header className="header">
@@ -57,3 +57,4 @@ export default () => {
     </>
   )
 }
+export default Header

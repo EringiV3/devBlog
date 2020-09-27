@@ -1,9 +1,13 @@
 import React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Title from "../components/title"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
+import Title from "../components/Title"
 
-export default ({ location }) => {
+type Location = {
+  pathname: string
+}
+type Props = { location: Location }
+const NotFoundPage: React.FC<Props> = ({ location }) => {
   return (
     <Layout>
       <SEO pagetitle="ページが見つかりません" pagepath={location.pathname} />
@@ -11,3 +15,5 @@ export default ({ location }) => {
     </Layout>
   )
 }
+
+export default NotFoundPage

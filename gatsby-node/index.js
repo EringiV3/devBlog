@@ -44,7 +44,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   blogResult.data.allMicrocmsBlog.edges.forEach(({ node, next, previous }) => {
     createPage({
       path: `/blog/post/${node.slug}`,
-      component: path.resolve(`./src/templates/blogpost-template.tsx`),
+      component: path.resolve(`./src/templates/BlogPostTemplate.tsx`),
       context: {
         id: node.id,
         next,
@@ -60,7 +60,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   Array.from({ length: blogPages }).forEach((_, i) => {
     createPage({
       path: i === 0 ? `/blog/` : `/blog/${i + 1}`,
-      component: path.resolve("./src/templates/blog-template.tsx"),
+      component: path.resolve("./src/templates/BlogTemplate.tsx"),
       context: {
         skip: blogPostsPerPage * i,
         limit: blogPostsPerPage,
@@ -82,7 +82,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           i === 0
             ? `/category/${node.fieldValue}/`
             : `/category/${node.fieldValue}/${i + 1}/`,
-        component: path.resolve(`./src/templates/category-template.tsx`),
+        component: path.resolve(`./src/templates/CategoryTemplate.tsx`),
         context: {
           categoryId: blogResult.data.allMicrocmsCategory.nodes.find(
             n => n.categorySlug === node.fieldValue

@@ -1,16 +1,21 @@
 import React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
 import { graphql, Link } from "gatsby"
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import PostList from "../components/post-list"
-import Title from "../components/title"
+import PostList from "../components/PostList"
+import Title from "../components/Title"
 
-export default ({ data, location, pageContext }) => {
+type Props = {
+  data: any
+  location: any
+  pageContext: any
+}
+const BlogTemplate: React.FC<Props> = ({ data, location, pageContext }) => {
   return (
     <>
       <Layout>
@@ -56,6 +61,7 @@ export default ({ data, location, pageContext }) => {
     </>
   )
 }
+export default BlogTemplate
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!) {

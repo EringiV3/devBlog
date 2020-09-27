@@ -1,13 +1,16 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Title from "../components/title"
-import AboutArticle from "../components/about-article"
-import PostList from "../components/post-list"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
+import Title from "../components/Title"
+import About from "../components/About"
+import PostList from "../components/PostList"
 import { THEME_UI_COLOR_PRIMARY, THEME_UI_COLOR_LIGHT_GRAY } from "../constants"
 
-export default function Home({ data }) {
+type Props = {
+  data: any
+}
+const IndexPage: React.FC<Props> = ({ data }) => {
   return (
     <Layout>
       <SEO />
@@ -26,7 +29,7 @@ export default function Home({ data }) {
       </section>
       <section className="about-container">
         <h2 className="about-headline">About</h2>
-        <AboutArticle />
+        <About />
       </section>
       <style jsx>{`
         .latest-posts-headline {
@@ -55,6 +58,7 @@ export default function Home({ data }) {
     </Layout>
   )
 }
+export default IndexPage
 
 export const query = graphql`
   query {

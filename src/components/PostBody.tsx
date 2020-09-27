@@ -12,7 +12,7 @@ import {
   LOOP_CONTENT_FIELD_ID_HTML,
 } from "../constants"
 
-const renderAst = new rehypeReact({
+const renderAst: Transformer = new (rehypeReact({
   createElement: React.createElement,
   Fragment: React.Fragment,
   components: {
@@ -20,30 +20,33 @@ const renderAst = new rehypeReact({
       return (
         // TODO Imgixやめてgatsby-imageにしたい
         <Imgix
-          src={props.src}
+          src={props.src as string}
           sizes="(max-width: 785px) 100vw, 785px"
-          htmlAttributes={{ alt: props.alt }}
+          htmlAttributes={{ alt: props.alt as string }}
         />
       )
     },
   },
-}).Compiler
+}) as any).Compiler()
 
-export default ({ loopContents }) => {
+const RenderAst = ({ target }) => {
+  const htmlAst = unified().use(parse, { fragment: true }).parse(target)
+  return renderAst(htmlAst)
+}
+const HtmlParser: React.FC<{ htmlString: string }> = ({ htmlString }) =>
+  ReactHtmlParser(htmlString)
+
+type Props = {
+  loopContents: Array<any>
+}
+const PostBody: React.FC<Props> = ({ loopContents }) => {
   useEffect(() => {
     Prism.highlightAll()
   }, [])
-
-  const RenderAst = ({ target }) => {
-    const htmlAst = unified().use(parse, { fragment: true }).parse(target)
-    return renderAst(htmlAst)
-  }
-  const HtmlParser = ({ htmlString }) => ReactHtmlParser(htmlString)
-
   return (
     <>
       <div className="postbody">
-        {loopContents.map((content, i) =>
+        {loopContents.map((content: any, i: number) =>
           content.fieldId === LOOP_CONTENT_FIELD_ID_RICH_EDITOR ? (
             <RenderAst key={i} target={content.richEditor} />
           ) : content.fieldId === LOOP_CONTENT_FIELD_ID_HTML ? (
@@ -59,3 +62,4 @@ export default ({ loopContents }) => {
     </>
   )
 }
+export default PostBody

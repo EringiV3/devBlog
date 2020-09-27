@@ -6,7 +6,7 @@ import {
   THEME_UI_COLOR_TEXT_COLOR,
 } from "../constants"
 
-export default () => {
+const About: React.FC = () => {
   const { microcmsAbout } = useStaticQuery(graphql`
     query {
       microcmsAbout {
@@ -34,3 +34,5 @@ export default () => {
     </>
   )
 }
+
+export default About

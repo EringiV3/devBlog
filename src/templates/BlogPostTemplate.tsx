@@ -1,6 +1,6 @@
 import React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
 import { graphql, Link } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -8,11 +8,16 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import htmlToText from "html-to-text"
-import PostBody from "../components/post-body"
+import PostBody from "../components/PostBody"
 import { THEME_UI_COLOR_SECONDARY } from "../constants"
-import PostHeader from "../components/post-header"
+import PostHeader from "../components/PostHeader"
 
-export default ({ data, pageContext, location }) => {
+type Props = {
+  data: any
+  location: any
+  pageContext: any
+}
+const BlogPostTemplate: React.FC<Props> = ({ data, pageContext, location }) => {
   return (
     <>
       <Layout>
@@ -41,7 +46,9 @@ export default ({ data, pageContext, location }) => {
   )
 }
 
-const PostBottomContent = ({ pageContext }) => (
+export default BlogPostTemplate
+
+const PostBottomContent: React.FC<{ pageContext: any }> = ({ pageContext }) => (
   <>
     <ul className="postlink-container">
       {pageContext.next && (
