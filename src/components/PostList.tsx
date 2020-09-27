@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { THEME_UI_COLOR_TEXT_COLOR, THEME_UI_COLOR_PRIMARY } from "../constants"
-import Button from "./Button"
+import Button from "./button"
 import {
   MicrocmsBlog,
   MicrocmsBlogCategory,

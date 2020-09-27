@@ -13,30 +13,31 @@ import {
 } from "../constants"
 import { MicrocmsBlogContent, Maybe } from "../../types/graphql-types"
 
-// const renderAst = new (rehypeReact({
-//   createElement: React.createElement,
-//   Fragment: React.Fragment,
-//   components: {
-//     img: props => {
-//       return (
-//         // TODO Imgixやめてgatsby-imageにしたい
-//         <Imgix
-//           src={props.src as string}
-//           sizes="(max-width: 785px) 100vw, 785px"
-//           htmlAttributes={{ alt: props.alt as string }}
-//         />
-//       )
-//     },
-//   },
-// }) as any).Compiler()
+// @ts-ignore
+const renderAst = new rehypeReact({
+  createElement: React.createElement,
+  Fragment: React.Fragment,
+  components: {
+    img: props => {
+      return (
+        // TODO Imgixやめてgatsby-imageにしたい
+        <Imgix
+          src={props.src as string}
+          sizes="(max-width: 785px) 100vw, 785px"
+          htmlAttributes={{ alt: props.alt as string }}
+        />
+      )
+    },
+  },
+}).Compiler
 
-// const RenderAst: React.FC<{ target: string }> = ({ target }) => {
-//   const htmlAst = unified().use(parse, { fragment: true }).parse(target)
-//   return renderAst(htmlAst)
-// }
-// const HtmlParser = ({ htmlString }: { htmlString: string }): JSX.Element => (
-//   <>{ReactHtmlParser(htmlString)}</>
-// )
+const RenderAst: React.FC<{ target: string }> = ({ target }) => {
+  const htmlAst = unified().use(parse, { fragment: true }).parse(target)
+  return renderAst(htmlAst)
+}
+const HtmlParser = ({ htmlString }: { htmlString: string }): JSX.Element => (
+  <>{ReactHtmlParser(htmlString)}</>
+)
 
 type Props = {
   loopContents:
@@ -51,7 +52,7 @@ const PostBody: React.FC<Props> = ({ loopContents }) => {
   return (
     <>
       <div className="postbody">
-        {/* {loopContents &&
+        {loopContents &&
           loopContents.map(
             (
               content: Maybe<
@@ -66,7 +67,7 @@ const PostBody: React.FC<Props> = ({ loopContents }) => {
                 content?.html ? (
                 <HtmlParser key={i} htmlString={content.html} />
               ) : null
-          )} */}
+          )}
       </div>
       <style jsx>{`
         .postbody {

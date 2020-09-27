@@ -1,8 +1,8 @@
 import React from "react"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { graphql, Link } from "gatsby"
-import Title from "../components/Title"
+import Title from "../components/title"
 import { THEME_UI_COLOR_TEXT_COLOR, THEME_UI_COLOR_PRIMARY } from "../constants"
 import { IPageProps } from "../../types/page-props"
 import {

@@ -1,8 +1,8 @@
 import React from "react"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
-import Title from "../components/Title"
-import About from "../components/About"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import Title from "../components/title"
+import About from "../components/about"
 import { IPageProps } from "../../types/page-props"
 
 const AboutPage: React.FC<IPageProps> = ({ location }) => {

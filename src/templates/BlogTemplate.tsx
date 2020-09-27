@@ -1,14 +1,14 @@
 import React from "react"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { graphql, Link } from "gatsby"
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import PostList from "../components/PostList"
-import Title from "../components/Title"
+import PostList from "../components/postList"
+import Title from "../components/title"
 import { IPageProps } from "../../types/page-props"
 import { BlogTemplateQuery } from "../../types/graphql-types"
 

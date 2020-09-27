@@ -1,6 +1,6 @@
 import React from "react"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 import { graphql, Link } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -8,9 +8,9 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons"
 import htmlToText from "html-to-text"
-import PostBody from "../components/PostBody"
+import PostBody from "../components/postBody"
 import { THEME_UI_COLOR_SECONDARY } from "../constants"
-import PostHeader from "../components/PostHeader"
+import PostHeader from "../components/postHeader"
 import {
   BlogPostTemplateQuery,
   SitePageContext,

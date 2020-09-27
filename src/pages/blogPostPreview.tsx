@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { getSearchParams } from "gatsby-query-params"
-import PostHeader from "../components/PostHeader"
-import PostBody from "../components/PostBody"
-import Layout from "../components/Layout"
+import PostHeader from "../components/postHeader"
+import PostBody from "../components/postBody"
+import Layout from "../components/layout"
 
 type BaseCmsProperties = {
   id: string
