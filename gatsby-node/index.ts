@@ -65,7 +65,7 @@ exports.createPages = async ({
   blogResult.data.allMicrocmsBlog.edges.forEach(({ node, next, previous }) => {
     createPage({
       path: `/blog/post/${node.slug}`,
-      component: path.resolve(`./src/templates/blogPostTemplate.tsx`),
+      component: path.resolve(`../src/templates/blogPostTemplate.tsx`),
       context: {
         id: node.id,
         next,
@@ -80,7 +80,7 @@ exports.createPages = async ({
   Array.from({ length: blogPages }).forEach((_, i) => {
     createPage({
       path: i === 0 ? `/blog/` : `/blog/${i + 1}`,
-      component: path.resolve("./src/templates/blogTemplate.tsx"),
+      component: path.resolve("../src/templates/blogTemplate.tsx"),
       context: {
         skip: BLOG_POST_PER_PAGE * i,
         limit: BLOG_POST_PER_PAGE,
@@ -105,7 +105,7 @@ exports.createPages = async ({
           i === 0
             ? `/category/${node.fieldValue}/`
             : `/category/${node.fieldValue}/${i + 1}/`,
-        component: path.resolve(`./src/templates/categoryTemplate.tsx`),
+        component: path.resolve(`../src/templates/categoryTemplate.tsx`),
         context: {
           categoryId: category.categoryId,
           categoryName: category.category,
