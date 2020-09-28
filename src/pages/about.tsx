@@ -2,9 +2,10 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Title from "../components/title"
-import AboutArticle from "../components/about-article"
+import About from "../components/about"
+import { IPageProps } from "../../types/page-props"
 
-export default ({ data, location }) => {
+const AboutPage: React.FC<IPageProps> = ({ location }) => {
   return (
     <Layout>
       <SEO
@@ -13,7 +14,8 @@ export default ({ data, location }) => {
         pagepath={location.pathname}
       />
       <Title title="About" />
-      <AboutArticle />
+      <About />
     </Layout>
   )
 }
+export default AboutPage

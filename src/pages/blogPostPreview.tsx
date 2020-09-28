@@ -1,12 +1,41 @@
 import React, { useState, useEffect } from "react"
 import { getSearchParams } from "gatsby-query-params"
-import PostHeader from "../components/post-header"
-import PostBody from "../components/post-body"
+import PostHeader from "../components/postHeader"
+import PostBody from "../components/postBody"
 import Layout from "../components/layout"
 
-export default () => {
-  const { contentId, draftKey } = getSearchParams()
-  const [postData, setPostData] = useState(null)
+type BaseCmsProperties = {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+type Category = BaseCmsProperties & {
+  category: string
+  categorySlug: string
+}
+
+type Content = {
+  fieldId: string
+  html?: string
+  richEditor?: string
+}
+
+type BlogPost = BaseCmsProperties & {
+  title: string
+  slug: string
+  publishDate: string
+  content: Array<Content>
+  category: Array<Category>
+}
+
+const BlogPostPreviewPage: React.FC = () => {
+  const {
+    contentId,
+    draftKey,
+  }: { contentId: string; draftKey: string } = getSearchParams()
+  const [postData, setPostData] = useState<null | BlogPost>(null)
 
   useEffect(() => {
     if (!contentId || !draftKey) return
@@ -22,10 +51,11 @@ export default () => {
         if (response.ok) {
           return response.json()
         }
+        return null
       })
-      .then(json => {
-        if (json) {
-          setPostData(json)
+      .then((data: any) => {
+        if (data !== null) {
+          setPostData(data)
         }
       })
   }, [contentId, draftKey])
@@ -44,3 +74,4 @@ export default () => {
     <div>loading...</div>
   )
 }
+export default BlogPostPreviewPage

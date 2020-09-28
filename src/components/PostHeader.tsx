@@ -1,11 +1,26 @@
 import React from "react"
 import { faClock, faFolderOpen } from "@fortawesome/free-solid-svg-icons"
-import Title from "../components/title"
-import Button from "../components/button"
+import Title from "./title"
+import Button from "./button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
+import { MicrocmsBlogCategory, Maybe } from "../../types/graphql-types"
 
-export default ({ title, publishDate, publishDateJP, category }) => {
+type Props = {
+  title: string
+  publishDate: string
+  publishDateJP: string
+  category:
+    | Maybe<Pick<MicrocmsBlogCategory, "id" | "category" | "categorySlug">>[]
+    | null
+    | undefined
+}
+const PostHeader: React.FC<Props> = ({
+  title,
+  publishDate,
+  publishDateJP,
+  category,
+}) => {
   return (
     <>
       <Title title={title} />
@@ -17,13 +32,24 @@ export default ({ title, publishDate, publishDateJP, category }) => {
         <div className="category-info">
           <FontAwesomeIcon icon={faFolderOpen} />
           <ul className="category-list">
-            {category.map(category => (
-              <li className="category-name" key={category.id}>
-                <Link to={`/category/${category.categorySlug}/`}>
-                  <Button label={category.category} />
-                </Link>
-              </li>
-            ))}
+            {category &&
+              category.map(
+                (
+                  category: Maybe<
+                    Pick<
+                      MicrocmsBlogCategory,
+                      "id" | "category" | "categorySlug"
+                    >
+                  >
+                ) =>
+                  category?.categorySlug && category?.category ? (
+                    <li className="category-name" key={category.id}>
+                      <Link to={`/category/${category.categorySlug}/`}>
+                        <Button label={category.category} />
+                      </Link>
+                    </li>
+                  ) : null
+              )}
           </ul>
         </div>
       </aside>
@@ -55,3 +81,5 @@ export default ({ title, publishDate, publishDateJP, category }) => {
     </>
   )
 }
+
+export default PostHeader

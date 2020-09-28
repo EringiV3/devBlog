@@ -2,7 +2,16 @@ import React from "react"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-export default ({
+type Props = {
+  pagetitle: string | null
+  pagedesc: string | null
+  pagepath: string | null
+  pageimg: string | null
+  pageimgw: number | null
+  pageimgh: number | null
+  blogimg: string | null
+}
+const SEO: React.FC<Partial<Props>> = ({
   pagetitle,
   pagedesc,
   pagepath,
@@ -14,7 +23,7 @@ export default ({
   const {
     site: { siteMetadata },
   } = useStaticQuery(graphql`
-    query {
+    query Seo {
       site {
         siteMetadata {
           title
@@ -59,9 +68,10 @@ export default ({
       <meta property="og:locale" content={siteMetadata.locale} />
       <meta property="og:url" content={siteMetadata.fbappid} />
       <meta property="og:image" content={imgurl} />
-      <meta property="og:image:width" content={imgw} />
-      <meta property="og:image:height" content={imgh} />
+      <meta property="og:image:width" content={`${imgw}`} />
+      <meta property="og:image:height" content={`${imgh}`} />
       <meta property="twitter:card" content="summary_large_image" />
     </Helmet>
   )
 }
+export default SEO

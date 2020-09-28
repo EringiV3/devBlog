@@ -1,7 +1,8 @@
 import React from "react"
 import { THEME_UI_COLOR_SECONDARY } from "../constants"
 
-export default ({ label }) => {
+type Props = { label: string }
+const Button: React.FC<Props> = ({ label }) => {
   return (
     <>
       <button className="button">{label}</button>
@@ -30,3 +31,4 @@ export default ({ label }) => {
     </>
   )
 }
+export default Button

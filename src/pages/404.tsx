@@ -2,8 +2,9 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Title from "../components/title"
+import { IPageProps } from "../../types/page-props"
 
-export default ({ location }) => {
+const NotFoundPage: React.FC<IPageProps> = ({ location }) => {
   return (
     <Layout>
       <SEO pagetitle="ページが見つかりません" pagepath={location.pathname} />
@@ -11,3 +12,5 @@ export default ({ location }) => {
     </Layout>
   )
 }
+
+export default NotFoundPage

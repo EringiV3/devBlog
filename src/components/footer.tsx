@@ -1,7 +1,7 @@
 import React from "react"
 import { THEME_UI_COLOR_LIGHT_GRAY, THEME_UI_COLOR_PRIMARY } from "../constants"
 
-export default () => {
+const Footer: React.FC = () => {
   return (
     <>
       <footer className="footer">
@@ -22,3 +22,4 @@ export default () => {
     </>
   )
 }
+export default Footer

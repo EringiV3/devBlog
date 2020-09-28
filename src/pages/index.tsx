@@ -3,11 +3,16 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Title from "../components/title"
-import AboutArticle from "../components/about-article"
-import PostList from "../components/post-list"
+import About from "../components/about"
+import PostList from "../components/postList"
 import { THEME_UI_COLOR_PRIMARY, THEME_UI_COLOR_LIGHT_GRAY } from "../constants"
+import { IndexQuery } from "../../types/graphql-types"
+import { IPageProps } from "../../types/page-props"
 
-export default function Home({ data }) {
+type Props = {
+  data: IndexQuery
+}
+const IndexPage: React.FC<Props & IPageProps> = ({ data }) => {
   return (
     <Layout>
       <SEO />
@@ -26,7 +31,7 @@ export default function Home({ data }) {
       </section>
       <section className="about-container">
         <h2 className="about-headline">About</h2>
-        <AboutArticle />
+        <About />
       </section>
       <style jsx>{`
         .latest-posts-headline {
@@ -55,9 +60,10 @@ export default function Home({ data }) {
     </Layout>
   )
 }
+export default IndexPage
 
 export const query = graphql`
-  query {
+  query Index {
     allMicrocmsBlog(
       sort: { order: DESC, fields: publishDate }
       skip: 0

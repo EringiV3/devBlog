@@ -5,16 +5,17 @@ import {
   THEME_UI_COLOR_SECONDARY,
   THEME_UI_COLOR_TEXT_COLOR,
 } from "../constants"
+import { AboutArticleQuery } from "../../types/graphql-types"
 
-export default () => {
-  const { microcmsAbout } = useStaticQuery(graphql`
-    query {
+const About: React.FC = () => {
+  const { microcmsAbout }: AboutArticleQuery = useStaticQuery(graphql`
+    query AboutArticle {
       microcmsAbout {
         content
       }
     }
   `)
-  return (
+  return microcmsAbout && microcmsAbout.content ? (
     <>
       <article className="content">
         <div className="container">
@@ -32,5 +33,7 @@ export default () => {
         }
       `}</style>
     </>
-  )
+  ) : null
 }
+
+export default About

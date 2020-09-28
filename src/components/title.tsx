@@ -1,6 +1,9 @@
 import React from "react"
 
-export default ({ title }) => {
+type Props = {
+  title: string
+}
+const Title: React.FC<Props> = ({ title }) => {
   return (
     <>
       <h1 className="title">{title}</h1>
@@ -14,3 +17,4 @@ export default ({ title }) => {
     </>
   )
 }
+export default Title
