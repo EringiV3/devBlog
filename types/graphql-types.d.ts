@@ -3352,18 +3352,6 @@ export type IndexQuery = { allMicrocmsBlog: { edges: Array<{ node: (
         & { category?: Maybe<Array<Maybe<Pick<MicrocmsBlogCategory, 'category' | 'categorySlug' | 'id'>>>> }
       ) }> } };
 
-export type CategoryTemplateQueryVariables = Exact<{
-  categoryId: Scalars['String'];
-  skip: Scalars['Int'];
-  limit: Scalars['Int'];
-}>;
-
-
-export type CategoryTemplateQuery = { allMicrocmsBlog: { edges: Array<{ node: (
-        Pick<MicrocmsBlog, 'title' | 'id' | 'slug' | 'publishDate'>
-        & { category?: Maybe<Array<Maybe<Pick<MicrocmsBlogCategory, 'category' | 'categorySlug' | 'id'>>>> }
-      ) }> } };
-
 export type BlogPostTemplateQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -3382,6 +3370,18 @@ export type BlogTemplateQueryVariables = Exact<{
 
 
 export type BlogTemplateQuery = { allMicrocmsBlog: { edges: Array<{ node: (
+        Pick<MicrocmsBlog, 'title' | 'id' | 'slug' | 'publishDate'>
+        & { category?: Maybe<Array<Maybe<Pick<MicrocmsBlogCategory, 'category' | 'categorySlug' | 'id'>>>> }
+      ) }> } };
+
+export type CategoryTemplateQueryVariables = Exact<{
+  categoryId: Scalars['String'];
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+}>;
+
+
+export type CategoryTemplateQuery = { allMicrocmsBlog: { edges: Array<{ node: (
         Pick<MicrocmsBlog, 'title' | 'id' | 'slug' | 'publishDate'>
         & { category?: Maybe<Array<Maybe<Pick<MicrocmsBlogCategory, 'category' | 'categorySlug' | 'id'>>>> }
       ) }> } };
