@@ -9,3 +9,5 @@ export const THEME_UI_COLOR_TEXT_COLOR: string = "#2d3748"
 
 export const BLOG_POST_PER_PAGE: number = 6
 export const CATEGORY_POST_PER_PAGE: number = 6
+
+export const TWITTER_ACCOUNT: string = "Eringi_V3"
