@@ -1,21 +1,13 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { graphql, Link } from "gatsby"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons"
+import { graphql } from "gatsby"
 import htmlToText from "html-to-text"
 import PostBody from "../components/postBody"
-import { THEME_UI_COLOR_SECONDARY } from "../constants"
 import PostHeader from "../components/postHeader"
-import {
-  BlogPostTemplateQuery,
-  SitePageContext,
-} from "../../types/graphql-types"
+import { BlogPostTemplateQuery } from "../../types/graphql-types"
 import { IPageProps } from "../../types/page-props"
+import PostBottomContents from "../components/postBottomContents"
 
 type Props = {
   data: BlogPostTemplateQuery
@@ -26,7 +18,7 @@ const getPageDesc = (htmlString: string | null | undefined): string | null => {
     return null
   }
   return `${htmlToText
-    .fromString(htmlString, {
+    .fromString(htmlString as string, {
       ignoreImage: true,
       ignoreHref: true,
     })
@@ -41,11 +33,19 @@ const BlogPostTemplate: React.FC<Props & IPageProps> = ({
   return (
     <>
       <Layout>
-        <SEO
-          pagetitle={data.microcmsBlog?.title}
-          pagedesc={getPageDesc(data.microcmsBlog?.content)}
-          pagepath={location.pathname}
-        />
+        {data.microcmsBlog &&
+        data.microcmsBlog.title &&
+        data.microcmsBlog.content ? (
+          <SEO
+            pagetitle={data.microcmsBlog?.title}
+            pagedesc={getPageDesc(
+              data.microcmsBlog.content[0]?.richEditor
+                ? data.microcmsBlog.content[0].richEditor
+                : data.microcmsBlog.content[0]?.html
+            )}
+            pagepath={location.pathname}
+          />
+        ) : null}
         <article className="content">
           <PostHeader
             title={data.microcmsBlog?.title ?? ""}
@@ -54,7 +54,11 @@ const BlogPostTemplate: React.FC<Props & IPageProps> = ({
             category={data.microcmsBlog?.category ?? []}
           />
           <PostBody loopContents={data.microcmsBlog?.content ?? []} />
-          <PostBottomContent pageContext={pageContext} />
+          <PostBottomContents
+            pageContext={pageContext}
+            title={data.microcmsBlog?.title ?? ""}
+            url={`${data.site?.siteMetadata?.siteUrl}${location.pathname}`}
+          />
         </article>
       </Layout>
     </>
@@ -62,67 +66,6 @@ const BlogPostTemplate: React.FC<Props & IPageProps> = ({
 }
 
 export default BlogPostTemplate
-
-const PostBottomContent: React.FC<{ pageContext: SitePageContext }> = ({
-  pageContext,
-}) => (
-  <>
-    <ul className="postlink-container">
-      {pageContext.next && (
-        <li className="prev-post-link">
-          <Link to={`/blog/post/${pageContext.next.slug}`} rel="prev">
-            <FontAwesomeIcon icon={faChevronLeft} />
-            <span className="prev-post-name">{pageContext.next.title}</span>
-          </Link>
-        </li>
-      )}
-      {pageContext.previous && (
-        <li className="next-post-link">
-          <Link to={`/blog/post/${pageContext.previous.slug}`} rel="next">
-            <span className="next-post-name">{pageContext.previous.title}</span>
-            <FontAwesomeIcon icon={faChevronRight} />
-          </Link>
-        </li>
-      )}
-    </ul>
-    <style jsx>{`
-      .postlink-container {
-        margin-top: 4em;
-        list-style: none;
-        color: ${THEME_UI_COLOR_SECONDARY};
-        font-size: 14px;
-        display: flex;
-      }
-
-      .postlink-container li {
-        width: 48%;
-        display: flex;
-        align-items: center;
-      }
-
-      .postlink-container a {
-        display: flex;
-        align-items: center;
-      }
-
-      .next-post-link {
-        margin-left: auto;
-        justify-content: flex-end;
-      }
-
-      .prev-post-link [class*="fa-"] {
-        margin-right: 10px;
-      }
-      .next-post-link [class*="fa-"] {
-        margin-left: 10px;
-      }
-      .prev-post-name,
-      .next-post-name {
-        padding: 0 5px;
-      }
-    `}</style>
-  </>
-)
 
 export const query = graphql`
   query BlogPostTemplate($id: String!) {
@@ -139,6 +82,11 @@ export const query = graphql`
         fieldId
         richEditor
         html
+      }
+    }
+    site {
+      siteMetadata {
+        siteUrl
       }
     }
   }
