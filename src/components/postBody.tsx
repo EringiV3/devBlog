@@ -1,8 +1,5 @@
 import React, { useEffect } from "react"
 import ReactHtmlParser from "react-html-parser"
-import Prism from "prismjs"
-import "prismjs/components/prism-jsx.min"
-import "prismjs/themes/prism.css"
 import Imgix from "react-imgix"
 import unified from "unified"
 import parse from "rehype-parse"
@@ -12,6 +9,9 @@ import {
   LOOP_CONTENT_FIELD_ID_HTML,
 } from "../constants"
 import { MicrocmsBlogContent, Maybe } from "../../types/graphql-types"
+import cheerio from "cheerio"
+import hljs from "highlight.js"
+import "highlight.js/styles/ocean.css"
 
 // @ts-ignore
 const renderAst = new rehypeReact({
@@ -32,7 +32,13 @@ const renderAst = new rehypeReact({
 }).Compiler
 
 const RenderAst: React.FC<{ target: string }> = ({ target }) => {
-  const htmlAst = unified().use(parse, { fragment: true }).parse(target)
+  const $ = cheerio.load(target)
+  $("pre code").each((_, elm) => {
+    const result = hljs.highlightAuto($(elm).text())
+    $(elm).html(result.value)
+    $(elm).addClass("hljs")
+  })
+  const htmlAst = unified().use(parse, { fragment: true }).parse($.html())
   return renderAst(htmlAst)
 }
 const HtmlParser = ({ htmlString }: { htmlString: string }): JSX.Element => (
@@ -44,11 +50,17 @@ type Props = {
     | Maybe<Pick<MicrocmsBlogContent, "html" | "fieldId" | "richEditor">>[]
     | null
     | undefined
+  highlightOnDomContentLoaded?: boolean
 }
-const PostBody: React.FC<Props> = ({ loopContents }) => {
+const PostBody: React.FC<Props> = ({
+  loopContents,
+  highlightOnDomContentLoaded,
+}) => {
   useEffect(() => {
-    Prism.highlightAll()
-  }, [])
+    if (highlightOnDomContentLoaded) {
+      hljs.initHighlightingOnLoad()
+    }
+  }, [highlightOnDomContentLoaded])
   return (
     <>
       <div className="postbody">
