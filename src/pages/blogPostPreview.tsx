@@ -68,7 +68,10 @@ const BlogPostPreviewPage: React.FC = () => {
         publishDateJP={postData.publishDate} // プレビューモードではgraphqlで取得していないので日時のフォーマットは行わずにISO8601形式でそのまま表示する
         category={postData.category}
       />
-      <PostBody loopContents={postData.content} />
+      <PostBody
+        loopContents={postData.content}
+        highlightOnDomContentLoaded={true}
+      />
     </Layout>
   ) : (
     <div>loading...</div>
