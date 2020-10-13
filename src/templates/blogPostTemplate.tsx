@@ -38,11 +38,7 @@ const BlogPostTemplate: React.FC<Props & IPageProps> = ({
         data.microcmsBlog.content ? (
           <SEO
             pagetitle={data.microcmsBlog?.title}
-            pagedesc={getPageDesc(
-              data.microcmsBlog.content[0]?.richEditor
-                ? data.microcmsBlog.content[0].richEditor
-                : data.microcmsBlog.content[0]?.html
-            )}
+            pagedesc={getPageDesc(data.microcmsBlog.content)}
             pagepath={location.pathname}
           />
         ) : null}
@@ -53,7 +49,7 @@ const BlogPostTemplate: React.FC<Props & IPageProps> = ({
             publishDateJP={data.microcmsBlog?.publishDateJP}
             category={data.microcmsBlog?.category ?? []}
           />
-          <PostBody loopContents={data.microcmsBlog?.content ?? []} />
+          <PostBody content={data.microcmsBlog?.content ?? ""} />
           <PostBottomContents
             pageContext={pageContext}
             title={data.microcmsBlog?.title ?? ""}
@@ -78,11 +74,7 @@ export const query = graphql`
         categorySlug
         id
       }
-      content {
-        fieldId
-        richEditor
-        html
-      }
+      content
     }
     site {
       siteMetadata {
