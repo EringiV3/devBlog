@@ -1480,7 +1480,7 @@ export type MicrocmsBlog = Node & {
   title?: Maybe<Scalars['String']>;
   slug?: Maybe<Scalars['String']>;
   publishDate?: Maybe<Scalars['Date']>;
-  content?: Maybe<Array<Maybe<MicrocmsBlogContent>>>;
+  content?: Maybe<Scalars['String']>;
   category?: Maybe<Array<Maybe<MicrocmsBlogCategory>>>;
   blogId?: Maybe<Scalars['String']>;
 };
@@ -1584,22 +1584,6 @@ export type MicrocmsBlogConnectionGroupArgs = {
   field: MicrocmsBlogFieldsEnum;
 };
 
-export type MicrocmsBlogContent = {
-  fieldId?: Maybe<Scalars['String']>;
-  richEditor?: Maybe<Scalars['String']>;
-  html?: Maybe<Scalars['String']>;
-};
-
-export type MicrocmsBlogContentFilterInput = {
-  fieldId?: Maybe<StringQueryOperatorInput>;
-  richEditor?: Maybe<StringQueryOperatorInput>;
-  html?: Maybe<StringQueryOperatorInput>;
-};
-
-export type MicrocmsBlogContentFilterListInput = {
-  elemMatch?: Maybe<MicrocmsBlogContentFilterInput>;
-};
-
 export type MicrocmsBlogEdge = {
   next?: Maybe<MicrocmsBlog>;
   node: MicrocmsBlog;
@@ -1700,9 +1684,6 @@ export type MicrocmsBlogFieldsEnum =
   | 'slug'
   | 'publishDate'
   | 'content'
-  | 'content___fieldId'
-  | 'content___richEditor'
-  | 'content___html'
   | 'category'
   | 'category___id'
   | 'category___createdAt'
@@ -1723,7 +1704,7 @@ export type MicrocmsBlogFilterInput = {
   title?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
   publishDate?: Maybe<DateQueryOperatorInput>;
-  content?: Maybe<MicrocmsBlogContentFilterListInput>;
+  content?: Maybe<StringQueryOperatorInput>;
   category?: Maybe<MicrocmsBlogCategoryFilterListInput>;
   blogId?: Maybe<StringQueryOperatorInput>;
 };
@@ -2223,7 +2204,7 @@ export type QueryMicrocmsBlogArgs = {
   title?: Maybe<StringQueryOperatorInput>;
   slug?: Maybe<StringQueryOperatorInput>;
   publishDate?: Maybe<DateQueryOperatorInput>;
-  content?: Maybe<MicrocmsBlogContentFilterListInput>;
+  content?: Maybe<StringQueryOperatorInput>;
   category?: Maybe<MicrocmsBlogCategoryFilterListInput>;
   blogId?: Maybe<StringQueryOperatorInput>;
 };
@@ -3366,9 +3347,9 @@ export type BlogPostTemplateQueryVariables = Exact<{
 
 
 export type BlogPostTemplateQuery = { microcmsBlog?: Maybe<(
-    Pick<MicrocmsBlog, 'title' | 'publishDate'>
+    Pick<MicrocmsBlog, 'title' | 'publishDate' | 'content'>
     & { publishDateJP: MicrocmsBlog['publishDate'] }
-    & { category?: Maybe<Array<Maybe<Pick<MicrocmsBlogCategory, 'category' | 'categorySlug' | 'id'>>>>, content?: Maybe<Array<Maybe<Pick<MicrocmsBlogContent, 'fieldId' | 'richEditor' | 'html'>>>> }
+    & { category?: Maybe<Array<Maybe<Pick<MicrocmsBlogCategory, 'category' | 'categorySlug' | 'id'>>>> }
   )>, site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'siteUrl'>> }> };
 
 export type BlogTemplateQueryVariables = Exact<{
