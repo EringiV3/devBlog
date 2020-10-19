@@ -4,7 +4,14 @@ import {
   MicrocmsBlogConnection,
   MicrocmsCategoryConnection,
 } from "../types/graphql-types"
-import { BLOG_POST_PER_PAGE, CATEGORY_POST_PER_PAGE } from "../src/constants"
+import {
+  BLOG_POST_PER_PAGE,
+  CATEGORY_POST_PER_PAGE,
+  OGP_IMAGE_WIDTH,
+  OGP_IMAGE_HEIGHT,
+  TWITTER_ACCOUNT,
+} from "../src/constants"
+import { createOGP } from "node-ogp-creator"
 
 type CreatePageArgs = {
   graphql: Function
@@ -30,6 +37,7 @@ exports.createPages = async ({
       allMicrocmsBlog(sort: { fields: publishDate, order: DESC }) {
         edges {
           node {
+            title
             id
             slug
           }
@@ -63,6 +71,16 @@ exports.createPages = async ({
   }
 
   blogResult.data.allMicrocmsBlog.edges.forEach(({ node, next, previous }) => {
+    createOGP({
+      title: node.title || "",
+      path: `public/ogp/${node.slug}.png`,
+      userName: TWITTER_ACCOUNT || "",
+      width: OGP_IMAGE_WIDTH,
+      height: OGP_IMAGE_HEIGHT,
+      styles: {
+        fontSize: 30,
+      },
+    })
     createPage({
       path: `/blog/post/${node.slug}`,
       component: path.resolve(`./src/templates/blogPostTemplate.tsx`),

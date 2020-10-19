@@ -11,3 +11,5 @@ export const BLOG_POST_PER_PAGE: number = 6
 export const CATEGORY_POST_PER_PAGE: number = 6
 
 export const TWITTER_ACCOUNT: string = "Eringi_V3"
+export const OGP_IMAGE_WIDTH: number = 640
+export const OGP_IMAGE_HEIGHT: number = 480
