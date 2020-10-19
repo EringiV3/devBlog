@@ -10390,10 +10390,10 @@ node-object-hash@^2.0.0:
   resolved "https://registry.yarnpkg.com/node-object-hash/-/node-object-hash-2.0.0.tgz#9971fcdb7d254f05016bd9ccf508352bee11116b"
   integrity sha512-VZR0zroAusy1ETZMZiGeLkdu50LGjG5U1KHZqTruqtTyQ2wfWhHG2Ow4nsUbfTFGlaREgNHcCWoM/OzEm6p+NQ==
 
-node-ogp-creator@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/node-ogp-creator/-/node-ogp-creator-0.1.1.tgz#93de751cb97b424746b9b3af8c1e417cdda19b45"
-  integrity sha512-/JTkva6pAfTw3jolX5w5LtMqfAGhAsx00gPDZCoSKGIihX1BP1aZ6otXVyR4SQqF1/sb9SwbdhGDAbWr69rVcg==
+node-ogp-creator@0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/node-ogp-creator/-/node-ogp-creator-0.1.2.tgz#63b1c901cd635c2d712faa2442d75266a1560dc9"
+  integrity sha512-gzlrwmlcYJnZCkYXRLe3A/QQiKm2JpuHAJU1bqc34jJMYw2MpoZq/Tu5vulQ3HEiOa+ubHGQeiYI0LrrWfbRVw==
   dependencies:
     canvas "^2.6.1"
     fs-extra "^9.0.1"

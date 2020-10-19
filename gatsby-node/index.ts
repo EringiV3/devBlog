@@ -77,7 +77,9 @@ exports.createPages = async ({
       userName: TWITTER_ACCOUNT || "",
       width: OGP_IMAGE_WIDTH,
       height: OGP_IMAGE_HEIGHT,
+      fontPath: "fonts/NotoSansCJKjp-Regular.otf",
       styles: {
+        font: "Noto Sans CJK JP",
         fontSize: 30,
       },
     })
