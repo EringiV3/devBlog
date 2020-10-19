@@ -50,6 +50,7 @@
     "gatsby-transformer-sharp": "^2.5.14",
     "highlight.js": "^10.2.1",
     "html-to-text": "^5.1.1",
+    "node-ogp-creator": "0.1.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",

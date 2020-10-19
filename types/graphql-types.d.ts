@@ -3347,7 +3347,7 @@ export type BlogPostTemplateQueryVariables = Exact<{
 
 
 export type BlogPostTemplateQuery = { microcmsBlog?: Maybe<(
-    Pick<MicrocmsBlog, 'title' | 'publishDate' | 'content'>
+    Pick<MicrocmsBlog, 'title' | 'publishDate' | 'slug' | 'content'>
     & { publishDateJP: MicrocmsBlog['publishDate'] }
     & { category?: Maybe<Array<Maybe<Pick<MicrocmsBlogCategory, 'category' | 'categorySlug' | 'id'>>>> }
   )>, site?: Maybe<{ siteMetadata?: Maybe<Pick<SiteSiteMetadata, 'siteUrl'>> }> };

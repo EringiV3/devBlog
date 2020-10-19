@@ -8,6 +8,7 @@ import PostHeader from "../components/postHeader"
 import { BlogPostTemplateQuery } from "../../types/graphql-types"
 import { IPageProps } from "../../types/page-props"
 import PostBottomContents from "../components/postBottomContents"
+import { OGP_IMAGE_WIDTH, OGP_IMAGE_HEIGHT } from "../constants"
 
 type Props = {
   data: BlogPostTemplateQuery
@@ -35,11 +36,15 @@ const BlogPostTemplate: React.FC<Props & IPageProps> = ({
       <Layout>
         {data.microcmsBlog &&
         data.microcmsBlog.title &&
-        data.microcmsBlog.content ? (
+        data.microcmsBlog.content &&
+        data.microcmsBlog.slug ? (
           <SEO
             pagetitle={data.microcmsBlog?.title}
             pagedesc={getPageDesc(data.microcmsBlog.content)}
             pagepath={location.pathname}
+            pageimg={`/ogp/${data.microcmsBlog.slug}.png`}
+            pageimgw={OGP_IMAGE_WIDTH}
+            pageimgh={OGP_IMAGE_HEIGHT}
           />
         ) : null}
         <article className="content">
@@ -74,6 +79,7 @@ export const query = graphql`
         categorySlug
         id
       }
+      slug
       content
     }
     site {
